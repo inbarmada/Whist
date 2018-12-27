@@ -1,0 +1,2 @@
+# Whist
+A card game
