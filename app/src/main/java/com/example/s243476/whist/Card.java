@@ -16,7 +16,7 @@ public class Card implements Comparable<Card>{
     }
 
     public int compareTo(Card other){
-        Log.d("compareTo", "Heyo I'm in compareTo");
+        Log.d("compareTo", "Heyo I'm in compareTo" + other);
         return mValue.compareTo(other.mValue);
     }
 }
