@@ -1,8 +1,14 @@
-package com.example.s243476.whist;
+package com.example.s243476.whist;/*package com.example.s243476.whist;
 
+<<<<<<< HEAD*/
 import java.util.Collection;
-
+import android.util.Log;
 public class Card {
+//=======
+
+
+public class Card implements Comparable<Card>{
+>>>>>>> cf20c91f3e108d23d594798969a02f9afd2f7d2b
     Integer mValue;
     Integer mType;
 
@@ -55,5 +61,10 @@ public class Card {
 
     public String toString(){
         return "Type: " + mType + " mValue: " + mValue + "\n";
+    }
+
+    public int compareTo(Card other){
+        Log.d("compareTo", "Heyo I'm in compareTo" + other);
+        return mValue.compareTo(other.mValue);
     }
 }

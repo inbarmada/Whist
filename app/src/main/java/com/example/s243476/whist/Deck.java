@@ -1,7 +1,6 @@
 package com.example.s243476.whist;
 
-import java.util.ArrayList;
-import java.util.Random;
+
 
 public class Deck {
     ArrayList<Card> deck = new ArrayList<Card>();
