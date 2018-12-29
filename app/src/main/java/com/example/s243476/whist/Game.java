@@ -38,7 +38,7 @@ public class Game extends AppCompatActivity {
             b.setText(i.toString());
             b.setOnClickListener(new OnClickListener(){
                 public void onClick(View arg0) {
-                    TextView tv = (TextView) findViewById(textView);
+                    TextView tv = (TextView) findViewById(R.id.textView);
                     tv.setText(one.choose(i).toString());
                 }
             });
