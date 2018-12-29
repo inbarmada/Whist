@@ -1,6 +1,8 @@
 package com.example.s243476.whist;
 
-public class Card {
+import android.util.Log;
+
+public class Card implements Comparable<Card>{
     Integer mValue;
     Integer mType;
 
@@ -11,5 +13,10 @@ public class Card {
 
     public String toString(){
         return "Type: " + mType + " mValue: " + mValue + "\n";
+    }
+
+    public int compareTo(Card other){
+        Log.d("compareTo", "Heyo I'm in compareTo");
+        return mValue.compareTo(other.mValue);
     }
 }
