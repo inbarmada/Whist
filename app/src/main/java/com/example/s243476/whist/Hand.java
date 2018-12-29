@@ -2,21 +2,24 @@ package com.example.s243476.whist;
 
 import java.util.ArrayList;
 
-public class Hand {
-    ArrayList<Integer> hand;
-    public Hand(){
-        hand = new ArrayList<Integer>();
+class Hand {
+    ArrayList<Card>  mCards;
+    boolean          mAuto;
+
+    public Hand(boolean isAuto){
+        mCards = new ArrayList<Card>();
+        mAuto = isAuto;
     }
 
     public void add(int a){
-        hand.add(a);
+        mCards.add(a);
     }
 
     public int choose(int a){
-        return hand.remove(a);
+        return mCards.remove(a);
     }
 
     public ArrayList<Integer> showCards(){
-        return hand;
+        return mCards;
     }
 }

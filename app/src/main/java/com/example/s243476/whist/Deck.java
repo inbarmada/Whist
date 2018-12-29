@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
-    ArrayList<Integer> deck = new ArrayList<Integer>();
+    ArrayList<Card> deck = new ArrayList<Card>();
     public Deck(){
         for(int i = 0; i<52; i++){
-            deck.add(i);
+            deck.add(Card(i));
         }
     }
+
+
 
     public void deal(Hand playerOne, Hand playerTwo, Hand playerThree, Hand playerFour){
         while(!deck.isEmpty()){
