@@ -7,7 +7,7 @@ public class Deck {
     ArrayList<Card> deck = new ArrayList<Card>();
     public Deck(){
         for(int i = 0; i<52; i++){
-            deck.add(Card(i));
+            deck.add(new Card(i));
         }
     }
 

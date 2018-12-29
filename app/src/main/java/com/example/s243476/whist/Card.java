@@ -8,4 +8,8 @@ public class Card {
         mType = number / 13;
         mValue = (number % 13) + 2;
     }
+
+    public String toString(){
+        return "Type: " + mType + " mValue: " + mValue + "\n";
+    }
 }

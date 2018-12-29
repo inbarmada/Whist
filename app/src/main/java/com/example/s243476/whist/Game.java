@@ -16,10 +16,10 @@ public class Game extends AppCompatActivity {
         Deck theDeck = new Deck();
 
         //Create 4 hands
-        Hand one = new Hand();
-        Hand two = new Hand();
-        Hand three = new Hand();
-        Hand four = new Hand();
+        Hand one = new Hand(false);
+        Hand two = new Hand(true);
+        Hand three = new Hand(true);
+        Hand four = new Hand(true);
 
         //Deal the cards
         theDeck.deal(one, two, three, four);

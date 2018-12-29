@@ -11,15 +11,16 @@ class Hand {
         mAuto = isAuto;
     }
 
-    public void add(int a){
+    public void add(Card a){
         mCards.add(a);
     }
 
-    public int choose(int a){
-        return mCards.remove(a);
+    public Card choose(Card a){
+        mCards.remove(a);
+        return a;
     }
 
-    public ArrayList<Integer> showCards(){
+    public ArrayList<Card> showCards(){
         return mCards;
     }
 }
