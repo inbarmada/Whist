@@ -21,16 +21,20 @@ public class Game extends AppCompatActivity {
 
 
         //Create a deck
-        Deck theDeck = new Deck();
+        Deck deck = new Deck();
 
         //Create 4 hands
-        final Hand one = new Hand(false);
-        final Hand two = new Hand(true);
-        final Hand three = new Hand(true);
-        final Hand four = new Hand(true);
+        final Hand hands[4];
+		hands[0]	= new Hand(false);
+        hands[1]	= new Hand(true);
+        hands[2]	= new Hand(true);
+        hands[3]	= new Hand(true);
 
         //Deal the cards
-        theDeck.deal(one, two, three, four);
+        deck.deal(hands);
+		
+        //Betting
+		
 
         //Show one's hand
         LinearLayout ll = (LinearLayout) findViewById(R.id.buttonlayout);

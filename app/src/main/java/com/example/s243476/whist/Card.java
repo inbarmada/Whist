@@ -12,52 +12,35 @@ public class Card implements Comparable<Card>{
     Integer mValue;
     Integer mType;
 
-    public Card(int number){
+	public Card(int number){
         mType = number / 13;
         mValue = (number % 13) + 2;
     }
 
-    public Card decideWinner(Card one, Card two, Card three, Card four, int ruler)
+    Card decideWinner(Card one, Card two, int ruler)
     {
-        Card Win1 = one;
-        Card Win2 = three;
+        Card winner = one;
         if(one.mType == two.mType)
         {
             if(one.mValue < two.mValue)
-                Win1 = two;
+                winner = two;
         }
         else
         {
             if(two.mType == ruler)
-                Win1 = two;
+                winner = two;
         }
+		return winner;
+	}
+		
 
-        if(three.mType == four.mType)
-        {
-            if(three.mValue < four.mValue)
-                Win2 = four;
-        }
-        else
-        {
-            if(four.mType == ruler)
-                Win2 = four;
-        }
-
-        if(Win1.mType == Win2.mType)
-        {
-            if(Win1.mValue < Win2.mValue)
-                return Win1;
-            else
-                return Win2;
-        }
-        else
-        {
-            if(Win2.mType == ruler)
-                return Win2;
-            else
-                return Win1;
-        }
-    }
+    public Card decideWinner(Card one, Card two, Card three, Card four, int ruler)
+    {
+        Card winner1 = decideWinner(one, two, ruler);
+        Card winner2 = decideWinner(three, four, ruler);
+        Card winner = decideWinner(winner1, winner2, ruler);
+		return winner;
+     }
 
     public String toString(){
         return "Type: " + mType + " mValue: " + mValue + "\n";

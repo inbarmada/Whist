@@ -12,23 +12,22 @@ public class Deck {
 
 
 
-    public void deal(Hand playerOne, Hand playerTwo, Hand playerThree, Hand playerFour){
+    public void deal(Hand[] hands){
+		int i = 0;
         while(!deck.isEmpty()){
             //Give playerOne a random card
-            int one = (int)(Math.random()*deck.size());
-            playerOne.add(deck.remove(one));
-
-            //Give playerTwo a random card
-            int two = (int)(Math.random()*deck.size());
-            playerTwo.add(deck.remove(two));
-
-            //Give playerThree a random card
-            int three = (int)(Math.random()*deck.size());
-            playerThree.add(deck.remove(three));
-
-            //Give playerFour a random card
-            int four = (int)(Math.random()*deck.size());
-            playerFour.add(deck.remove(four));
+            int rnd = (int)(Math.random()*deck.size());
+            hands[i].add(deck.remove(rnd));
+			
+			if(i == 3)
+				i = 0;
+			else
+				i++;
         }
+		// simple verification
+		for(i=0; i<4; i++)
+		{
+			assert(hands[i].size == 13);
+		}
     }
 }
