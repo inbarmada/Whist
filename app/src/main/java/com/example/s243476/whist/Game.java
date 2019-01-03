@@ -12,32 +12,76 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.*;
 
-public class Game extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+public class Game {
+
+	int mCurRuler;
+    Player mPlayers[4];
+	int mNextToPlay = 0;
+	int mNextToBet = 0;
+
+	public Game(Player p1, Player p2, Player p3, Player p4)
+	{
+		mPlayer[0] = p1;
+		mPlayer[1] = p2;
+		mPlayer[2] = p3;
+		mPlayer[3] = p4;
+		mNextToPlay = 0;
+		mNextToBet = 0;
+	}
+	
+	public Play(int numOfRounds)
+	{
+		for(int i=0; i<numOfRounds; i++)
+		{
+			PlayRound();
+		}
+	}
+	
+    private int PlayRound() 
+	{
         setContentView(R.layout.activity_game);
-
+		Hand Hands[4];
 
         //Create a deck
         Deck deck = new Deck();
 
-        //Create 4 hands
-        final Hand hands[4];
-		hands[0]	= new Hand(false);
-        hands[1]	= new Hand(true);
-        hands[2]	= new Hand(true);
-        hands[3]	= new Hand(true);
-
         //Deal the cards
         deck.deal(hands);
+			
+		betting();
 		
-        //Betting
-		
+		playing();
+    }
+	
+	private int betting()
+	{
+		int i = mNextToBet % 4;
+		mNextToBet ++;
+		int passCount;
+		int passTable[4] = {0,0,0,0};
+		int 
+					
+		do
+		{
+			if(passTable[i] == 0)
+			{
+				if(mPlayer[i].Declare() == 0)
+				{
+					passTable[i] = 1;
+					passCount ++;
+				}
+			}		
+			if(i == 3)
+				i = 0;
+			else
+				i++;
+		} while(passCount < 3);
+	}
 
-        //Show one's hand
-        LinearLayout ll = (LinearLayout) findViewById(R.id.buttonlayout);
+	private int playing()
+	{
+		LinearLayout ll = (LinearLayout) findViewById(R.id.buttonlayout);
         for(final Card i : one.showCards()) {
             Button b = new Button(this);
             b.setText(i.toString());
@@ -52,8 +96,7 @@ public class Game extends AppCompatActivity {
 
             ll.addView(b);
         }
-    }
-
+	}	
     public Hand getRoundCards(Card one, Card two, Card three, Card four){
         Log.d("getRoundCards", "Heyo I'm in getRoundCards");
 

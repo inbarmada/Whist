@@ -8,11 +8,9 @@ import java.util.Comparator;
 
 class Hand {
     ArrayList<Card>  mCards;
-    boolean          mAuto;
 
-    public Hand(boolean isAuto){
+    public Hand(){
         mCards = new ArrayList<Card>();
-        mAuto = isAuto;
         //Sort mCards
         //Collections.sort(mCards);
         Log.d("HandSort", mCards.toString());
