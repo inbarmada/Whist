@@ -1,5 +1,4 @@
 package com.example.s243476.whist;
-import android.util.Log;
 
 public class Card {
     Integer mValue;
@@ -21,10 +20,12 @@ public class Card {
         else
         {
             if(two.mType == ruler)
+			{
                 winner = two;
+			}
         }
+//        Log.d("Compare", "Comparing " + One + " to " + two + ", and the winner is..." + winner);
 		return winner;
-        Log.d("Compare", "Comparing " + One + " to " + two ", and the winner is..." + winner);
 	}
 		
 

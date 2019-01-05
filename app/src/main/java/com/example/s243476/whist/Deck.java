@@ -1,6 +1,6 @@
 package com.example.s243476.whist;
 
-
+import java.util.ArrayList;
 
 public class Deck {
     ArrayList<Card> mDeck;
