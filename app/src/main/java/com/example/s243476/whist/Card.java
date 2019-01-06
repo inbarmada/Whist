@@ -1,6 +1,6 @@
 package com.example.s243476.whist;
 
-public class Card {
+public class Card{
     Integer mValue;
     Integer mType;
 
@@ -9,7 +9,7 @@ public class Card {
         mValue = (number % 13) + 2;
     }
 
-    Card Compare(Card one, Card two, int ruler)
+    static Card Compare(Card one, Card two, int ruler)
     {
         Card winner = one;
         if(one.mType == two.mType)
@@ -29,7 +29,7 @@ public class Card {
 	}
 		
 
-    public Card Compare(Card one, Card two, Card three, Card four, int ruler)
+    public static Card Compare(Card one, Card two, Card three, Card four, int ruler)
     {
         Card winner1 = Compare(one, two, ruler);
         Card winner2 = Compare(three, four, ruler);

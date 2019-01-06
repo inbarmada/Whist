@@ -3,8 +3,6 @@ package com.example.s243476.whist;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 class Hand {
     ArrayList<Card>  mCards;

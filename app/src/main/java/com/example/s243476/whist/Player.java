@@ -1,9 +1,6 @@
-package com.example.s243476.whist;/*package com.example.s243476.whist;
+package com.example.s243476.whist;
 
-<<<<<<< HEAD*/
-import java.string;
-
-
+import java.lang.String;
 
 public class Player 
 {
@@ -11,7 +8,7 @@ public class Player
 	int    mAuto;
 	String mName;
 	int    mTotalScore;
-	
+	static int mId = 0;
 	// Player Profile
 	Hand   mCurHand;
 	Hand   mCurBet;
@@ -21,7 +18,7 @@ public class Player
 	public Player()
 	{
 		mAuto = 1;
-        mName = "auto".mId++;
+        mName = "auto" + mId++;
         mTotalScore = 0;
     }
 	
@@ -31,6 +28,10 @@ public class Player
         mName = name;
         mTotalScore = 0;
     }
+
+    public Card choose(Card c){
+		return mCurHand.choose(c);
+	}
 	
 	public String Name()
 	{
@@ -44,6 +45,10 @@ public class Player
 
 	public int UpdateScore(int gameScore)
 	{
-		mTotalScore += gameScore;
+		return mTotalScore += gameScore;
+    }
+
+    public int Declare(){
+		return 0;
     }
 }

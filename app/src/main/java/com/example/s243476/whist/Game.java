@@ -1,36 +1,28 @@
 package com.example.s243476.whist;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View.*;
 
-
-public class Game {
+public class Game{
 
 	int mCurRuler;
-    Player mPlayers[4];
+    Player[] mPlayers = new Player[4];
 	int mNextToPlay = 0;
 	int mNextToBet = 0;
+	MainActivity runner;
 
 	public Game(Player p1, Player p2, Player p3, Player p4)
 	{
-		mPlayer[0] = p1;
-		mPlayer[1] = p2;
-		mPlayer[2] = p3;
-		mPlayer[3] = p4;
+		mPlayers[0] = p1;
+		mPlayers[1] = p2;
+		mPlayers[2] = p3;
+		mPlayers[3] = p4;
 		mNextToPlay = 0;
 		mNextToBet = 0;
+
+		runner = new MainActivity();
 	}
-	
-	public Play(int numOfRounds)
+
+	public void Play(int numOfRounds)
 	{
 		for(int i=0; i<numOfRounds; i++)
 		{
@@ -38,40 +30,38 @@ public class Game {
 		}
 	}
 	
-    private int PlayRound() 
+    private void PlayRound()
 	{
-        setContentView(R.layout.activity_game);
-		Hand Hands[4];
+		Hand[] Hands = new Hand[4];
 
         //Create a deck
         Deck deck = new Deck();
 
         //Deal the cards
-        deck.deal(hands);
+        deck.deal(Hands);
 			
 		betting();
 		
 		playing();
     }
 	
-	private int betting()
+	private void betting()
 	{
 		int i = mNextToBet % 4;
 		mNextToBet ++;
-		int passCount;
-		int passTable[4] = {0,0,0,0};
-		int 
-					
+		int passCount = 0;
+		int[] passTable = {0,0,0,0};
+
 		do
 		{
 			if(passTable[i] == 0)
 			{
-				if(mPlayer[i].Declare() == 0)
+				if(mPlayers[i].Declare() == 0)
 				{
 					passTable[i] = 1;
 					passCount ++;
 				}
-			}		
+			}
 			if(i == 3)
 				i = 0;
 			else
@@ -79,35 +69,31 @@ public class Game {
 		} while(passCount < 3);
 	}
 
-	private int playing()
+	private void playing()
 	{
-		LinearLayout ll = (LinearLayout) findViewById(R.id.buttonlayout);
-        for(final Card i : one.showCards()) {
-            Button b = new Button(this);
-            b.setText(i.toString());
-            b.setOnClickListener(new OnClickListener(){
-                public void onClick(View arg0) {
-                    Log.d("onClick", "Heyo I'm in onClick");
-                    Card chosenOne = one.choose(i);
-                    int type = chosenOne.mType;
-                    getRoundCards(chosenOne, two.choose(type), three.choose(type), four.choose(type));
-                }
-            });
-
-            ll.addView(b);
+        for(final Card i : mPlayers[0].mCurHand.showCards()) {
+        	runner.createCardButton(mPlayers[0], i);
         }
-	}	
-    public Hand getRoundCards(Card one, Card two, Card three, Card four){
-        Log.d("getRoundCards", "Heyo I'm in getRoundCards");
 
-        TextView tv = (TextView) findViewById(R.id.textView);
+	}
 
-        if(one.compareTo(two) > 0 && one.compareTo(three) > 0  && one.compareTo(four) > 0 ) {
-            tv.setText(one.toString() + " You won!");
-            return new Hand(true);
-        }
-        tv.setText(one.toString() + " Nonono you lost :(");
-        return new Hand(false);
+	public void playerOneChose(Card one){
+
+	}
+
+    public void getRoundCards(Card one, Card two, Card three, Card four, int ruler){
+		Log.d("getRoundCards", "Heyo I'm in getRoundCards");
+
+		Card winner = Card.Compare(one, two, three, four, ruler);
+		if(winner.equals(one)){
+			mPlayers[0].UpdateScore(1);
+		}else if(winner.equals(two)){
+		   mPlayers[1].UpdateScore(1);
+		}else if(winner.equals(three)){
+		   mPlayers[2].UpdateScore(1);
+		}else if(winner.equals(four)){
+		   mPlayers[3].UpdateScore(1);
+	   }
     }
 
 }
