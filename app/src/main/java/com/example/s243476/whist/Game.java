@@ -6,7 +6,6 @@ public class Game{
     Player[] mPlayers = new Player[4];
 	int mNextToPlay = 0;
 	int mNextToBet = 0;
-	MainActivity runner;
 
 	public Game(Player p1, Player p2, Player p3, Player p4)
 	{
@@ -17,12 +16,11 @@ public class Game{
 		mNextToPlay = 0;
 		mNextToBet = 0;
 
-		runner = new MainActivity();
 	}
 
 	public void Play(int numOfRounds)
 	{
-		MainActivity.log("In Game", "Trying to play");
+		UI.log("In Game", "Trying to play");
 	    for(int i=0; i<numOfRounds; i++)
 		{
 			PlayRound();
@@ -31,36 +29,36 @@ public class Game{
 	
     private void PlayRound()
 	{
-		MainActivity.log("In Game", "Starting PlayRound()");
+		UI.log("In Game", "Starting PlayRound()");
 	    Hand[] Hands = new Hand[4];
         Hands[0] = new Hand();
         Hands[1] = new Hand();
         Hands[2] = new Hand();
         Hands[3] = new Hand();
-        MainActivity.log("In Game", "Created Hand");
+        UI.log("In Game", "Created Hand");
 
         //Create a deck
         Deck deck = new Deck();
-        MainActivity.log("In Game", "Created Deck");
+        UI.log("In Game", "Created Deck");
 
 
         //Deal the cards
         deck.deal(Hands);
-        MainActivity.log("In Game", "Did Deck.deal");
+        UI.log("In Game", "Did Deck.deal");
 
         mPlayers[0].createHand(Hands[0]);
         mPlayers[1].createHand(Hands[1]);
         mPlayers[2].createHand(Hands[2]);
         mPlayers[3].createHand(Hands[3]);
-        MainActivity.log("In Game", "Created Hands");
+        UI.log("In Game", "Created Hands");
 
 
         betting();
-        MainActivity.log("In Game", "betting()");
+        UI.log("In Game", "betting()");
 
 
         playing();
-        MainActivity.log("In Game", "playing()");
+        UI.log("In Game", "playing()");
 
     }
 	
@@ -90,12 +88,12 @@ public class Game{
 
 	private void playing()
 	{
-        MainActivity.log("In Game", "in playing");
+        UI.log("In Game", "in playing");
 
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
-            MainActivity.log("In Game", "Trying to create a card button");
+            UI.log("In Game", "Trying to create a card button");
 
-            runner.createCardButton(mPlayers[0], i);
+            UI.createCardButton(mPlayers[0], i);
         }
 
 	}
@@ -105,7 +103,7 @@ public class Game{
 	}
 
     public void getRoundCards(Card one, Card two, Card three, Card four, int ruler){
-		MainActivity.log("getRoundCards", "Heyo I'm in getRoundCards");
+		UI.log("getRoundCards", "Heyo I'm in getRoundCards");
 
 		Card winner = Card.Compare(one, two, three, four, ruler);
 		if(winner.equals(one)){

@@ -24,7 +24,7 @@ public class Card{
                 winner = two;
 			}
         }
-//        Log.d("Compare", "Comparing " + One + " to " + two + ", and the winner is..." + winner);
+        UI.log("Compare", "Comparing " + one + " to " + two + ", and the winner is..." + winner);
 		return winner;
 	}
 		

@@ -13,17 +13,17 @@ public class Deck {
     }
 
     public void deal(Hand[] hands){
-        MainActivity.log("In Deck", "Trying to deal");
+        UI.log("In Deck", "Trying to deal");
 		int i = 0;
         while(!mDeck.isEmpty()){
-            MainActivity.log("In Deck", "In while loop");
+            UI.log("In Deck", "In while loop");
 
             //Give playerOne a random card
             int rnd = (int)(Math.random()*mDeck.size());
-            MainActivity.log("In Deck", "got rnd" + rnd);
+            UI.log("In Deck", "got rnd" + rnd);
 
             hands[i].add((Card)mDeck.remove(rnd));
-            MainActivity.log("In Deck", "added card to hands[" + i + "] length: " + hands[i].mCards.size());
+            UI.log("In Deck", "added card to hands[" + i + "] length: " + hands[i].mCards.size());
 
 
             if(i==3)
