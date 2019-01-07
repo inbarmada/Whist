@@ -13,15 +13,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("In MainActivity", "super.oncreate done");
+        log("In MainActivity", "super.oncreate done");
 
         setContentView(R.layout.activity_main);
-        Log.d("In MainActivity", "have set layout");
+        log("In MainActivity", "have set layout");
 
     }
 
     public void startIt(View view){
-        Log.d("In MainActivity", "In StartIt");
+        log("In MainActivity", "In StartIt");
 		// Intent start = new Intent(this, Game.class);
 		// startActivity(start);
 		Player p1 = new Player("Johnson");
@@ -29,45 +29,49 @@ public class MainActivity extends AppCompatActivity {
 		Player p3 = new Player();
 		Player p4 = new Player();
 
-        Log.d("In MainActivity", "Have Created Players");
+        log("In MainActivity", "Have Created Players");
 
         game = new Game(p1, p2, p3, p4);
-        Log.d("In MainActivity", "Have Created Game");
+        log("In MainActivity", "Have Created Game");
 
         setContentView(R.layout.activity_game);
 
-        Log.d("In MainActivity", "Have set content view");
+        log("In MainActivity", "Have set content view");
 
         game.Play(13);
-        Log.d("In MainActivity", "Have game.play-ed");
+        log("In MainActivity", "Have game.play-ed");
 
     }
 
     public void createCardButton(final Player one, final Card i){
-        Log.d("In MainActivity", "Trying to create button");
+        log("In MainActivity", "Trying to create button");
 
         LinearLayout ll = (LinearLayout) findViewById(R.id.buttonlayout);
-        Log.d("In MainActivity", "Found view by id");
+        log("In MainActivity", "Found view by id");
 
         Button b = new Button(this);
-        Log.d("In MainActivity", "Created button");
+        log("In MainActivity", "Created button");
 
         b.setText(i.toString());
-        Log.d("In MainActivity", "Set text");
+        log("In MainActivity", "Set text");
 
         b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0) {
-                Log.d("onClick", "Heyo I'm in onClick");
+                log("onClick", "Heyo I'm in onClick");
                 Card chosenOne = one.choose(i);
                 int type = chosenOne.mType;
                 game.playerOneChose(chosenOne);
             }
         });
-        Log.d("In MainActivity", "created listener");
+        log("In MainActivity", "created listener");
 
         ll.addView(b);
-        Log.d("In MainActivity", "Added button to view");
+        log("In MainActivity", "Added button to view");
 
     }
 
+    static void log(String str1, String str2)
+    {
+    	Log.d(str1, str2);
+    }
 }
