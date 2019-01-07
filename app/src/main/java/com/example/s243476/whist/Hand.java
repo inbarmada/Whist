@@ -16,7 +16,11 @@ class Hand {
 
     //Add a card to mCards (for use when dealt a card)
     public void add(Card a){
+        Log.d("In Hand", "Trying to add(Card)" + a + "length " + mCards.size());
+
         mCards.add(a);
+        Log.d("In Hand", "new length " + mCards.size());
+
     }
 
     //Choose a card, if not automatic

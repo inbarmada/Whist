@@ -24,7 +24,8 @@ public class Game{
 
 	public void Play(int numOfRounds)
 	{
-		for(int i=0; i<numOfRounds; i++)
+		Log.d("In Game", "Trying to play");
+	    for(int i=0; i<numOfRounds; i++)
 		{
 			PlayRound();
 		}
@@ -32,17 +33,37 @@ public class Game{
 	
     private void PlayRound()
 	{
-		Hand[] Hands = new Hand[4];
+		Log.d("In Game", "Starting PlayRound()");
+	    Hand[] Hands = new Hand[4];
+        Hands[0] = new Hand();
+        Hands[1] = new Hand();
+        Hands[2] = new Hand();
+        Hands[3] = new Hand();
+        Log.d("In Game", "Created Hand");
 
         //Create a deck
         Deck deck = new Deck();
+        Log.d("In Game", "Created Deck");
+
 
         //Deal the cards
         deck.deal(Hands);
-			
-		betting();
-		
-		playing();
+        Log.d("In Game", "Did Deck.deal");
+
+        mPlayers[0].createHand(Hands[0]);
+        mPlayers[1].createHand(Hands[1]);
+        mPlayers[2].createHand(Hands[2]);
+        mPlayers[3].createHand(Hands[3]);
+        Log.d("In Game", "Created Hands");
+
+
+        betting();
+        Log.d("In Game", "betting()");
+
+
+        playing();
+        Log.d("In Game", "playing()");
+
     }
 	
 	private void betting()
@@ -71,8 +92,12 @@ public class Game{
 
 	private void playing()
 	{
+        Log.d("In Game", "in playing");
+
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
-        	runner.createCardButton(mPlayers[0], i);
+            Log.d("In Game", "Trying to create a card button");
+
+            runner.createCardButton(mPlayers[0], i);
         }
 
 	}

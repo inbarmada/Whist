@@ -29,6 +29,10 @@ public class Player
         mTotalScore = 0;
     }
 
+    public void createHand(Hand h){
+	    mCurHand = h;
+    }
+
     public Card choose(Card c){
 		return mCurHand.choose(c);
 	}
