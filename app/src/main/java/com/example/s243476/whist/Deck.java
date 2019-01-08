@@ -12,24 +12,25 @@ public class Deck {
         }
     }
 
-    public void deal(Hand[] hands){
-        UI.log("In Deck", "Trying to deal");
+    public void Deal(Hand[] hands){
 		int i = 0;
         while(!mDeck.isEmpty()){
-            UI.log("In Deck", "In while loop");
-
-            //Give playerOne a random card
+			//Give playerOne a random card
+			Card c;
             int rnd = (int)(Math.random()*mDeck.size());
-            UI.log("In Deck", "got rnd" + rnd);
-
-            hands[i].add((Card)mDeck.remove(rnd));
-            UI.log("In Deck", "added card to hands[" + i + "] length: " + hands[i].mCards.size());
-
+			//UI.log("Deck::Deal", "RND=" + rnd +" (" + mDeck.size() + ")");
+			c = mDeck.remove(rnd);
+ 			//UI.log("Deck::Deal", "CARD=" + c);
+			hands[i].Add(c);
 
             if(i==3)
-		i = 0;
+				i = 0;
             else
-		i++;
+				i++;
         }
+		for(i=0; i<4; i++)
+		{
+			hands[i].Sort();
+		}
     }
 }

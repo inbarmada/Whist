@@ -20,49 +20,51 @@ public class Game{
 
 	public void Play(int numOfRounds)
 	{
-		UI.log("In Game", "Trying to play");
+		UI.log("Game::Play", "Trying to play");
 	    for(int i=0; i<numOfRounds; i++)
 		{
 			PlayRound();
 		}
 	}
-	
+	private void Debug()
+	{
+		int i;
+		for(i=0; i<4; i++)
+		{
+			mPlayers[i].DebugInfo();
+		}
+
+	}
     private void PlayRound()
 	{
-		UI.log("In Game", "Starting PlayRound()");
-	    Hand[] Hands = new Hand[4];
-        Hands[0] = new Hand();
-        Hands[1] = new Hand();
-        Hands[2] = new Hand();
-        Hands[3] = new Hand();
-        UI.log("In Game", "Created Hand");
-
-        //Create a deck
+		int i;
+		UI.log("Game::PlayRound", "Starting...");
         Deck deck = new Deck();
-        UI.log("In Game", "Created Deck");
+	    Hand[] Hands = new Hand[4];
 
+		for(i=0; i<4; i++)
+		{
+			Hands[i] = new Hand();
+			mPlayers[i].SetHand(Hands[i]);
+		}
+        UI.log("Game::PlayRound", "Created (Empty) Hand");
+		Debug();
 
         //Deal the cards
-        deck.deal(Hands);
-        UI.log("In Game", "Did Deck.deal");
+        deck.Deal(Hands);
+        UI.log("Game::PlayRound", "Deal the deck");
+		Debug();
+		
+        UI.log("Game::PlayRound", "Time to bet...");
+        Betting();
 
-        mPlayers[0].createHand(Hands[0]);
-        mPlayers[1].createHand(Hands[1]);
-        mPlayers[2].createHand(Hands[2]);
-        mPlayers[3].createHand(Hands[3]);
-        UI.log("In Game", "Created Hands");
-
-
-        betting();
-        UI.log("In Game", "betting()");
-
+        UI.log("Game::PlayRound", "Let's start playing...");
 
         playing();
-        UI.log("In Game", "playing()");
 
     }
 	
-	private void betting()
+	private void Betting()
 	{
 		int i = mNextToBet % 4;
 		mNextToBet ++;
@@ -71,8 +73,10 @@ public class Game{
 
 		do
 		{
+			UI.log("Game::Betting", "i = " + i);
 			if(passTable[i] == 0)
 			{
+				UI.log("Game::Betting", "declare...");
 				if(mPlayers[i].Declare() == 0)
 				{
 					passTable[i] = 1;
@@ -83,15 +87,15 @@ public class Game{
 				i = 0;
 			else
 				i++;
-		} while(passCount < 3);
+		} while(passCount < 4);
 	}
 
 	private void playing()
 	{
-        UI.log("In Game", "in playing");
+        UI.log("Game", "in playing");
 
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
-            UI.log("In Game", "Trying to create a card button");
+            UI.log("Game::Playing", "Trying to create a card button");
 
             UI.createCardButton(mPlayers[0], i);
         }

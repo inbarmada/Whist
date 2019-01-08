@@ -29,7 +29,7 @@ public class Player
         mTotalScore = 0;
     }
 
-    public void createHand(Hand h){
+    public void SetHand(Hand h){
 	    mCurHand = h;
     }
 
@@ -52,7 +52,20 @@ public class Player
 		return mTotalScore += gameScore;
     }
 
-    public int Declare(){
+    public int Declare()
+	{
 		return 0;
     }
+	
+    public int DebugInfo()
+	{
+		UI.log("Player::Declare", this + ": " + mCurHand);
+		return 0;
+    }
+	
+    public String toString()
+	{
+		return mName + "(" + mTotalScore + ")";
+    }
+	
 }
