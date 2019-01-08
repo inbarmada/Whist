@@ -23,13 +23,15 @@ class Hand {
         return card;
     }
 
-	public int Evaluate()
+	public Bet Evaluate(Bet curBet)
 	{
 		int i;
 		int[] typeCtr  = {0, 0, 0, 0};
 		int[] typeHighs  = {0, 0, 0, 0};
-		int Highs  = 0;
-		int MaxCntr  = 0;
+		int highs  = 0;
+		int maxCntr  = 0;
+		int preferredRuler = -1;
+		Bet newBet;
 		
 		for (i = 0; i < mCards.size(); i++)
 		{
@@ -37,21 +39,36 @@ class Hand {
 			int type = card.Type();
 			int val = card.Value();
 			typeCtr[type] ++;
-			if(val >= 12)
+			if(val >= 11) // "ACES" + "KINGS"
 			{
 				typeHighs[type] ++;
-				Highs  ++;
+				highs ++;
 			}
 		}
 		for(i = 0; i < 4; i++)
 		{
-			if(typeCtr[i] > MaxCntr)
+			if(typeCtr[i] > maxCntr)
 			{
-				MaxCntr = typeCtr[i];
+				maxCntr = typeCtr[i];
+				preferredRuler = i;
 			}
 		}
-		UI.log("Hand::Evaluate", "Hand" + Highs + "+" + MaxCntr + "=" + Highs + MaxCntr);
-		return Highs + MaxCntr;
+		// don't count the same cards twice
+		highs -= typeHighs[preferredRuler];
+		
+		UI.log("Hand::Evaluate", "" + highs + "+" + maxCntr + "=" + (highs + maxCntr));
+		UI.log("Hand::Evaluate", "preferred ruler = " + preferredRuler);
+		
+		if((highs + maxCntr > curBet.Value()) || 
+			((curBet.Value() == highs + maxCntr) && (preferredRuler > curBet.Ruler())))
+		{
+			newBet = new Bet(preferredRuler, highs + maxCntr);
+		}
+		else
+		{
+			newBet = curBet;
+		}
+		return newBet;
 	}
 	
     //Choose a card if automatic

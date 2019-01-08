@@ -55,7 +55,10 @@ public class Game{
         UI.log("Game::PlayRound", "Deal the deck");
 		Debug();
 		
-        UI.log("Game::PlayRound", "Time to bet...");
+        UI.log("Game::PlayRound", "Time to declare (find a ruler)...");
+        Declaring();
+
+        UI.log("Game::PlayRound", "Time to put a bet...");
         Betting();
 
         UI.log("Game::PlayRound", "Let's start playing...");
@@ -63,6 +66,31 @@ public class Game{
         playing();
 
     }
+	private void Declaring()
+	{
+		int i = mNextToBet % 4;
+		mNextToBet ++;
+		int passCount = 0;
+		int[] passTable = {0,0,0,0};
+		Bet curBet = new Bet (0,4);
+
+		do
+		{
+			if(passTable[i] == 0)
+			{
+				curBet = mPlayers[i].Declare(curBet);
+				if(1)
+				{
+					passTable[i] = 1;
+					passCount ++;
+				}
+			}
+			if(i == 3)
+				i = 0;
+			else
+				i++;
+		} while(passCount < 4);
+	}
 	
 	private void Betting()
 	{
@@ -73,11 +101,9 @@ public class Game{
 
 		do
 		{
-			UI.log("Game::Betting", "i = " + i);
 			if(passTable[i] == 0)
 			{
-				UI.log("Game::Betting", "declare...");
-				if(mPlayers[i].Declare() == 0)
+				if(mPlayers[i].Betting() == 0)
 				{
 					passTable[i] = 1;
 					passCount ++;

@@ -33,7 +33,7 @@ public class Player
 	    mCurHand = h;
     }
 
-    public Card choose(Card c){
+    public Card Choose(Card c){
 		return mCurHand.choose(c);
 	}
 	
@@ -54,12 +54,14 @@ public class Player
 
     public int Declare()
 	{
+		UI.log("Player::Declare", this + ": " + mCurHand);
+		int value = mCurHand.Evaluate();
 		return 0;
     }
 	
     public int DebugInfo()
 	{
-		UI.log("Player::Declare", this + ": " + mCurHand);
+		UI.log("Player::DebugInfo", this + ": " + mCurHand);
 		return 0;
     }
 	
