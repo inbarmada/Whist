@@ -1,4 +1,4 @@
-JAVAC="c:/program Files/Java/jdk1.8.0_161/bin/javac.exe"
+JAVAC="c:/program Files/Java/jdk1.8.0_191/bin/javac.exe"
 RM=rm
 
 COMPILE_OPT =  "-Xlint:unchecked"
@@ -17,7 +17,7 @@ VPATH=$(SRC_DIR):$(PLATFORM_DIR)
 
 %.class: %.java
 	@echo javac $< $@
-	@$(JAVAC) $(COMPILE_OPT) -sourcepath "./" $< -d .
+	$(JAVAC) $(COMPILE_OPT) -sourcepath ./ $< -d .
 	
 
 all:  $(TARGETS)

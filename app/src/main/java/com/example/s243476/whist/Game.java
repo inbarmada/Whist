@@ -72,14 +72,14 @@ public class Game{
 		mNextToBet ++;
 		int passCount = 0;
 		int[] passTable = {0,0,0,0};
-		Bet curBet = new Bet (0,4);
+		Bet curDeclaration = new Bet (0,4);
 
 		do
 		{
 			if(passTable[i] == 0)
 			{
-				curBet = mPlayers[i].Declare(curBet);
-				if(1)
+				curDeclaration = mPlayers[i].Declare(curDeclaration);
+				if(true)
 				{
 					passTable[i] = 1;
 					passCount ++;
@@ -90,11 +90,12 @@ public class Game{
 			else
 				i++;
 		} while(passCount < 4);
+		UI.log("Game:Declaring", "..." + curDeclaration);
 	}
 	
 	private void Betting()
 	{
-		int i = mNextToBet % 4;
+/*		int i = mNextToBet % 4;
 		mNextToBet ++;
 		int passCount = 0;
 		int[] passTable = {0,0,0,0};
@@ -114,7 +115,7 @@ public class Game{
 			else
 				i++;
 		} while(passCount < 4);
-	}
+*/	}
 
 	private void playing()
 	{

@@ -52,11 +52,12 @@ public class Player
 		return mTotalScore += gameScore;
     }
 
-    public int Declare()
+    public Bet Declare(Bet curDeclaration)
 	{
-		UI.log("Player::Declare", this + ": " + mCurHand);
-		int value = mCurHand.Evaluate();
-		return 0;
+		UI.log("Player::Declare", this + ": " + mCurHand + "(" + curDeclaration + ")");
+		Bet NewBet = mCurHand.Evaluate(curDeclaration);
+		UI.log("Player::Declare", this + ": " + mCurHand + "(" + NewBet + ")");
+		return NewBet;
     }
 	
     public int DebugInfo()
