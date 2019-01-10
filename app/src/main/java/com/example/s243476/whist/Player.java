@@ -11,7 +11,7 @@ public class Player
 	static int mId = 0;
 	// Player Profile
 	Hand   mCurHand;
-	Hand   mCurBet;
+	Hand   mCurContract;
 
 	static int mAutoId;
 
@@ -33,8 +33,9 @@ public class Player
 	    mCurHand = h;
     }
 
-    public Card Choose(Card c){
-		return mCurHand.choose(c);
+    public Card Choose()
+	{
+		return mCurHand.Choose();
 	}
 	
 	public String Name()
@@ -52,17 +53,16 @@ public class Player
 		return mTotalScore += gameScore;
     }
 
-    public Bet Declare(Bet curDeclaration)
+    public Contract Bid(Contract curContract)
 	{
-		UI.log("Player::Declare", this + ": " + mCurHand + "(" + curDeclaration + ")");
-		Bet NewBet = mCurHand.Evaluate(curDeclaration);
-		UI.log("Player::Declare", this + ": " + mCurHand + "(" + NewBet + ")");
-		return NewBet;
+		Contract NewContract = mCurHand.Evaluate(curContract);
+		UI.log("Player::Declare", this + ": " + mCurHand + "(" + NewContract + ")");
+		return NewContract;
     }
 	
     public int DebugInfo()
 	{
-		UI.log("Player::DebugInfo", this + ": " + mCurHand);
+		UI.log(".....Player::DebugInfo", this + ": " + mCurHand);
 		return 0;
     }
 	

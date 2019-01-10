@@ -9,6 +9,6 @@ public class UI {
 
     static void log(String str1, String str2)
     {
-		System.out.println(str1+" "+str2);
+		System.out.println(str1 + " " + str2);
     }
 }

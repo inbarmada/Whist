@@ -1,40 +1,43 @@
 package com.example.s243476.whist;
 import java.util.ArrayList;
+
+
+
+
 public class Card implements Comparable<Card> 
 {
-    int mValue;
-    int mType;
-	String[] mTypesStr = { "CL", "DI", "HE", "SP"};
-	String[] mValueStr = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    CardSuit mSuit;
+	CardRank mRank;
 
 	public Card(int number){
-        mType = number / 13;
-        mValue = (number % 13);
+        mSuit = new CardSuit(number / 13);
+        mRank = new CardRank (number % 13);
     }
 	
 	
-	public int Type()
+	public int Suit()
 	{
-		return mType;
+		return mSuit.indexOf();
 	}
-	public int Value()
+	
+	public int Rank()
 	{
-		return mValue;
+		return mRank.indexOf();
 	}
 	
 
 	// The following comarison used for evaluating a Whist Winner
-    static Card Compare(Card one, Card two, int ruler)
+    static Card Compare(Card one, Card two, int trunmp)
     {
         Card winner = one;
-        if(one.mType == two.mType)
+        if(one.mSuit.indexOf() == two.mSuit.indexOf())
         {
-            if(one.mValue < two.mValue)
+            if(one.mRank.indexOf() < two.mRank.indexOf())
                 winner = two;
         }
         else
         {
-            if(two.mType == ruler)
+            if(two.mSuit.indexOf() == trunmp)
 			{
                 winner = two;
 			}
@@ -43,11 +46,11 @@ public class Card implements Comparable<Card>
 		return winner;
 	}
 	
-    public static Card Compare(Card one, Card two, Card three, Card four, int ruler)
+    public static Card Compare(Card one, Card two, Card three, Card four, int trunmp)
     {
-        Card winner1 = Compare(one, two, ruler);
-        Card winner2 = Compare(three, four, ruler);
-        Card winner =  Compare(winner1, winner2, ruler);
+        Card winner1 = Compare(one, two, trunmp);
+        Card winner2 = Compare(three, four, trunmp);
+        Card winner =  Compare(winner1, winner2, trunmp);
 		return winner;
     }
 
@@ -55,20 +58,21 @@ public class Card implements Comparable<Card>
     @Override
 	public int compareTo(Card two) 
 	{
-		if(this.mType == ((Card)two).mType)
+		if(this.mSuit.indexOf() == ((Card)two).mSuit.indexOf())
 		{
-			return this.mValue - ((Card)two).mValue;
+			return ((Card)two).mRank.indexOf() - this.mRank.indexOf();
 		}
 		else
 		{
-			return this.mType - ((Card)two).mType;
+			return ((Card)two).mSuit.indexOf() - this.mSuit.indexOf();
 		}
 	}
 	
 
 
+    @Override
     public String toString(){
-        return mTypesStr[mType] + ":" + mValueStr[mValue];
+        return mSuit.toString() + ":" + mRank.toString();
     }
 
 }

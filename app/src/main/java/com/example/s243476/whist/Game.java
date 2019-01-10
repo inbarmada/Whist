@@ -20,10 +20,9 @@ public class Game{
 
 	public void Play(int numOfRounds)
 	{
-		UI.log("Game::Play", "Trying to play");
-	    for(int i=0; i<numOfRounds; i++)
+	    for(int i=0; i < numOfRounds; i++)
 		{
-			PlayRound();
+			Play1Round();
 		}
 	}
 	private void Debug()
@@ -35,7 +34,7 @@ public class Game{
 		}
 
 	}
-    private void PlayRound()
+    private void Play1Round()
 	{
 		int i;
 		UI.log("Game::PlayRound", "Starting...");
@@ -48,38 +47,37 @@ public class Game{
 			mPlayers[i].SetHand(Hands[i]);
 		}
         UI.log("Game::PlayRound", "Created (Empty) Hand");
-		Debug();
 
         //Deal the cards
-        deck.Deal(Hands);
         UI.log("Game::PlayRound", "Deal the deck");
+        deck.Deal(Hands);
 		Debug();
 		
-        UI.log("Game::PlayRound", "Time to declare (find a ruler)...");
-        Declaring();
+        UI.log("Game::PlayRound", "Time to bid (for the Trump Suit)...");
+        Bidding();
 
-        UI.log("Game::PlayRound", "Time to put a bet...");
-        Betting();
+        UI.log("Game::PlayRound", "Time to set the Contracts...");
+        ContractsSetting();
 
         UI.log("Game::PlayRound", "Let's start playing...");
-
         playing();
 
     }
-	private void Declaring()
+	private void Bidding()
 	{
 		int i = mNextToBet % 4;
 		mNextToBet ++;
 		int passCount = 0;
 		int[] passTable = {0,0,0,0};
-		Bet curDeclaration = new Bet (0,4);
+		Contract curContract = new Contract (0,4);
+		Contract NewContract = new Contract (0,4);
 
 		do
 		{
 			if(passTable[i] == 0)
 			{
-				curDeclaration = mPlayers[i].Declare(curDeclaration);
-				if(true)
+				curContract = mPlayers[i].Bid(curContract);
+				if(NewContract != curContract)
 				{
 					passTable[i] = 1;
 					passCount ++;
@@ -90,10 +88,10 @@ public class Game{
 			else
 				i++;
 		} while(passCount < 4);
-		UI.log("Game:Declaring", "..." + curDeclaration);
+		UI.log("Game:Bidding", "..." + curContract);
 	}
 	
-	private void Betting()
+	private void ContractsSetting()
 	{
 /*		int i = mNextToBet % 4;
 		mNextToBet ++;
@@ -104,7 +102,7 @@ public class Game{
 		{
 			if(passTable[i] == 0)
 			{
-				if(mPlayers[i].Betting() == 0)
+				if(mPlayers[i].Contractting() == 0)
 				{
 					passTable[i] = 1;
 					passCount ++;
@@ -119,14 +117,14 @@ public class Game{
 
 	private void playing()
 	{
-        UI.log("Game", "in playing");
+ /*       UI.log("Game", "in playing");
 
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
             UI.log("Game::Playing", "Trying to create a card button");
 
             UI.createCardButton(mPlayers[0], i);
         }
-
+*/
 	}
 
 	public void playerOneChose(Card one){

@@ -19,7 +19,7 @@ public class Main {
         UI.log("MainSDK::main", "Have Created Game");
 		
 
-        mGame.Play(13);
+        mGame.Play(1);
         UI.log("MainSDK::main", "Have game.play-ed");
 
     }

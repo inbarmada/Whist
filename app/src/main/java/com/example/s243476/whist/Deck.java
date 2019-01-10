@@ -24,5 +24,9 @@ public class Deck {
 			else
 				i++;
         }
+		for(i=0; i<4; i++)
+		{
+			hands[i].Sort();
+		}
     }
 }
