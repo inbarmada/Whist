@@ -11,7 +11,7 @@ public class Player
 	static int mId = 0;
 	// Player Profile
 	Hand   mCurHand;
-	Hand   mCurContract;
+	Contract   mCurContract;
 
 	static int mAutoId;
 
@@ -55,9 +55,20 @@ public class Player
 
     public Contract Bid(Contract curContract)
 	{
-		Contract NewContract = mCurHand.Evaluate(curContract);
-		UI.log("Player::Declare", this + ": " + mCurHand + "(" + NewContract + ")");
-		return NewContract;
+		mCurContract = mCurHand.Evaluate(curContract);
+		//UI.log("Player::Bid", this + ": " + mCurHand + "(" + mCurContract + ")");
+		return mCurContract;
+    }
+    public int SetContract(CardSuit trump, int count)
+	{
+		if(count != 0)
+		{
+			int level = mCurHand.SetContract(trump, count);
+			mCurContract = new Contract(trump.indexOf(), level);
+		}
+			
+		UI.log("Player::SetContract", this.toString() + ", " + mCurContract);
+		return mCurContract.Level();
     }
 	
     public int DebugInfo()

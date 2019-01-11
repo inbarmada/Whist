@@ -48,79 +48,6 @@ class Hand {
         return c;
     }
 
-
-/*
-	public Contract Evaluate(Contract curContract)
-	{
-		int i;
-		int[] valuePerRank = {
-			0, //2 
-			0, //3
-			0, //4 
-			0, //5
-			0, //6
-			0, //7
-			0, //8
-			0, //9
-			0, //10
-			1, //J
-			4, //Q
-			8, //K
-			10,//A };
-		int[] suitCtr  = {0, 0, 0, 0, 0};
-		int[] suitHighs  = {0, 0, 0, 0, 0};
-		int highs  = 0;
-		int maxSuitCntr  = 0;
-		int preferredRuler = -1;
-		int maxEvaluation;
-		Contract newContract;
-			
-		for (i = 0; i < mCards.size(); i++)
-		{
-			Card card = mCards.get(i);
-			int suit = card.Suit();
-			int rank = card.Rank();
-			suitCtr[suit] ++;
-			suitHighs[suit] += valuePerRank[rank];
-			highs += valuePerRank[rank];
-		}
-		for(i = 0; i < 4; i++)
-		{
-			if(suitCtr[i] > maxSuitCntr)
-			{
-				maxSuitCntr = suitCtr[i];
-				preferredRuler = i;
-			}
-		}
-		if(highs > (maxSuitCntr*10) + highs - suitHighs[preferredRuler]) 
-		{
-			maxEvaluation = highs;
-			preferredRuler = 4; // No Trump
-		}
-		else
-		{
-			highs -= suitHighs[preferredRuler];
-			maxEvaluation = (maxSuitCntr*10) + highs;
-		}
-		
-		// don't count the same cards twice
-		
-		UI.log("Hand::Evaluate", "" + highs + "+" + maxSuitCntr + "=" + maxEvaluation);
-		UI.log("Hand::Evaluate", "preferred ruler = " + preferredRuler);
-		
-		if((maxEvaluation > curContract.Value()) || 
-			((curContract.Value() == maxEvaluation) && (preferredRuler > curContract.Ruler())))
-		{
-			newContract = new Contract(preferredRuler, maxEvaluation);
-		}
-		else
-		{
-			newContract = curContract;
-		}
-		return newContract;
-
-	}
-*/
 	public int EvaluteSuit(ArrayList<Card> cards, int trump)
 	{
 		int size = cards.size();
@@ -179,7 +106,7 @@ class Hand {
 		if (update > 0)
 		{
 			Contract newContract = new Contract(curTrump, curEvaluation);
-			UI.log("Hand::Evalute", newContract.toString());
+			//UI.log("Hand::Evalute", newContract.toString());
 			return newContract;
 		}
 		else
@@ -187,6 +114,19 @@ class Hand {
 			return curContract;
 		}	
 	}
+
+	public int SetContract(CardSuit trump, int count)
+	{
+		int eval = 0;
+		UI.log("Hand::SetContract", "start...");
+
+		for(int suit=0; suit<4; suit++)
+		{
+			eval += EvaluteSuit(mCardsBySuit[suit], trump.indexOf());
+		}
+		return eval;
+	}
+
 	
     //Choose a card if automatic
     public Card Choose(int suit){

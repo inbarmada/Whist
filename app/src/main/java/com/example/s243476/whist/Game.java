@@ -2,7 +2,8 @@ package com.example.s243476.whist;
 
 public class Game{
 
-	int mCurRuler;
+	Contract mCurContract;
+	int mCurWinner;
     Player[] mPlayers = new Player[4];
 	int mNextToPlay = 0;
 	int mNextToBet = 0;
@@ -69,51 +70,47 @@ public class Game{
 		mNextToBet ++;
 		int passCount = 0;
 		int[] passTable = {0,0,0,0};
-		Contract curContract = new Contract (0,4);
-		Contract NewContract = new Contract (0,4);
+		Contract curContract = new Contract (-1,4);
+		Contract newContract;
+		int winner = -1;
 
 		do
 		{
 			if(passTable[i] == 0)
 			{
-				curContract = mPlayers[i].Bid(curContract);
-				if(NewContract != curContract)
+				newContract = mPlayers[i].Bid(curContract);
+				if((newContract.Trump() != curContract.Trump()) || (newContract.Level() != curContract.Level()))
 				{
+					curContract = newContract;
+					winner = i;
+					UI.log("Game:Bidding", "Player " + mPlayers[i] + " Bid: " + curContract);
+				}
+				else
+				{
+					UI.log("Game:Bidding", "Player " + mPlayers[i] + " Passed (" + passCount + ")");
 					passTable[i] = 1;
 					passCount ++;
-				}
+				}					
 			}
 			if(i == 3)
 				i = 0;
 			else
 				i++;
 		} while(passCount < 4);
-		UI.log("Game:Bidding", "..." + curContract);
+		UI.log("Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
+		mCurWinner = winner;
+		mCurContract = curContract;
 	}
 	
 	private void ContractsSetting()
 	{
-/*		int i = mNextToBet % 4;
-		mNextToBet ++;
-		int passCount = 0;
-		int[] passTable = {0,0,0,0};
-
-		do
+		CardSuit trump = new CardSuit(mCurContract.Trump());
+		int count = mCurContract.Level();
+		for(int i=0; i<4; i++)
 		{
-			if(passTable[i] == 0)
-			{
-				if(mPlayers[i].Contractting() == 0)
-				{
-					passTable[i] = 1;
-					passCount ++;
-				}
-			}
-			if(i == 3)
-				i = 0;
-			else
-				i++;
-		} while(passCount < 4);
-*/	}
+			count += mPlayers[(mCurWinner+i)%4].SetContract(trump, count);
+		}
+	}
 
 	private void playing()
 	{
