@@ -6,21 +6,21 @@ public class Main {
 
     public static void main(String[] args) {
 		Game mGame;
-        UI.log("MainSDK::main", "Starting...");
+        UI.Log(Severity.DEBUG, "MainSDK::main", "Starting...");
 
  		Player p1 = new Player("Johnson");
 		Player p2 = new Player();
 		Player p3 = new Player();
 		Player p4 = new Player();
 
-        UI.log("MainSDK::main", "Have Created Players");
+        UI.Log(Severity.DEBUG, "MainSDK::main", "Have Created Players");
 
         mGame = new Game(p1, p2, p3, p4);
-        UI.log("MainSDK::main", "Have Created Game");
+        UI.Log(Severity.DEBUG, "MainSDK::main", "Have Created Game");
 		
 
         mGame.Play(1);
-        UI.log("MainSDK::main", "Have game.play-ed");
+        UI.Log(Severity.DEBUG, "MainSDK::main", "Have game.play-ed");
 
     }
 

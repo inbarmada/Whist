@@ -10,14 +10,15 @@ public class Card implements Comparable<Card>
 	CardRank mRank;
 
 	public Card(int number){
-        mSuit = new CardSuit(number / 13);
-        mRank = new CardRank (number % 13);
+		CardSuit arr[] = CardSuit.values();
+        mSuit = arr[number / 13];
+       mRank = new CardRank (number % 13);
     }
 	
 	
-	public int Suit()
+	public CardSuit Suit()
 	{
-		return mSuit.indexOf();
+		return mSuit;
 	}
 	
 	public int Rank()
@@ -27,30 +28,30 @@ public class Card implements Comparable<Card>
 	
 
 	// The following comarison used for evaluating a Whist Winner
-    static Card Compare(Card one, Card two, int trunmp)
+    static Card Compare(Card one, Card two, CardSuit trump)
     {
         Card winner = one;
-        if(one.mSuit.indexOf() == two.mSuit.indexOf())
+        if(one.mSuit == two.mSuit)
         {
             if(one.mRank.indexOf() < two.mRank.indexOf())
                 winner = two;
         }
         else
         {
-            if(two.mSuit.indexOf() == trunmp)
+            if(two.mSuit == trump)
 			{
                 winner = two;
 			}
         }
-        UI.log("Card::Compare", "Comparing " + one + " to " + two + ", and the winner is..." + winner);
+        UI.Log(Severity.DEBUG, "Card::Compare", "Comparing " + one + " to " + two + ", and the winner is..." + winner);
 		return winner;
 	}
 	
-    public static Card Compare(Card one, Card two, Card three, Card four, int trunmp)
+    public static Card Compare(Card one, Card two, Card three, Card four, CardSuit trump)
     {
-        Card winner1 = Compare(one, two, trunmp);
-        Card winner2 = Compare(three, four, trunmp);
-        Card winner =  Compare(winner1, winner2, trunmp);
+        Card winner1 = Compare(one, two, trump);
+        Card winner2 = Compare(three, four, trump);
+        Card winner =  Compare(winner1, winner2, trump);
 		return winner;
     }
 
@@ -58,13 +59,13 @@ public class Card implements Comparable<Card>
     @Override
 	public int compareTo(Card two) 
 	{
-		if(this.mSuit.indexOf() == ((Card)two).mSuit.indexOf())
+		if(this.mSuit == ((Card)two).mSuit)
 		{
 			return ((Card)two).mRank.indexOf() - this.mRank.indexOf();
 		}
 		else
 		{
-			return ((Card)two).mSuit.indexOf() - this.mSuit.indexOf();
+			return ((Card)two).mSuit.ordinal() - this.mSuit.ordinal();
 		}
 	}
 	

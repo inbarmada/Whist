@@ -38,7 +38,7 @@ public class Game{
     private void Play1Round()
 	{
 		int i;
-		UI.log("Game::PlayRound", "Starting...");
+		UI.Log(Severity.INFO, "Game::PlayRound", "Starting...");
         Deck deck = new Deck();
 	    Hand[] Hands = new Hand[4];
 
@@ -47,20 +47,20 @@ public class Game{
 			Hands[i] = new Hand();
 			mPlayers[i].SetHand(Hands[i]);
 		}
-        UI.log("Game::PlayRound", "Created (Empty) Hand");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Created (Empty) Hand");
 
         //Deal the cards
-        UI.log("Game::PlayRound", "Deal the deck");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Deal the deck");
         deck.Deal(Hands);
 		Debug();
 		
-        UI.log("Game::PlayRound", "Time to bid (for the Trump Suit)...");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
         Bidding();
 
-        UI.log("Game::PlayRound", "Time to set the Contracts...");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
         ContractsSetting();
 
-        UI.log("Game::PlayRound", "Let's start playing...");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Let's start playing...");
         playing();
 
     }
@@ -70,54 +70,62 @@ public class Game{
 		mNextToBet ++;
 		int passCount = 0;
 		int[] passTable = {0,0,0,0};
-		Contract curContract = new Contract (-1,4);
+		Contract curContract = new Contract (CardSuit.NT,3);
 		Contract newContract;
 		int winner = -1;
 
 		do
 		{
-			if(passTable[i] == 0)
+			if(passTable[i%4] == 0)
 			{
-				newContract = mPlayers[i].Bid(curContract);
-				if((newContract.Trump() != curContract.Trump()) || (newContract.Level() != curContract.Level()))
+				Player player = mPlayers[i%4];
+				newContract = player.Bid(curContract);
+				UI.Log(Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
+				if(newContract.equals(curContract))
 				{
-					curContract = newContract;
-					winner = i;
-					UI.log("Game:Bidding", "Player " + mPlayers[i] + " Bid: " + curContract);
-				}
-				else
-				{
-					UI.log("Game:Bidding", "Player " + mPlayers[i] + " Passed (" + passCount + ")");
-					passTable[i] = 1;
+					UI.Log(Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
+					passTable[i%4] = 1;
 					passCount ++;
 				}					
+				else
+				{
+					curContract = newContract;
+					winner = i%4;
+					UI.Log(Severity.INFO, "Game:Bidding", "Player " + player + " Bid: " + curContract);
+				}
 			}
-			if(i == 3)
-				i = 0;
-			else
-				i++;
+			i++;
 		} while(passCount < 4);
-		UI.log("Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
-		mCurWinner = winner;
-		mCurContract = curContract;
+		if(winner >= 0)
+		{
+			UI.Log(Severity.INFO, "Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
+			mCurWinner = winner;
+			mCurContract = curContract;
+		}
+		else
+		{
+			UI.Log(Severity.INFO, "Game:Bidding", "No Winner");
+		}
 	}
 	
 	private void ContractsSetting()
 	{
-		CardSuit trump = new CardSuit(mCurContract.Trump());
-		int count = mCurContract.Level();
+		CardSuit trump = mCurContract.Trump();
+		int count = 0;
 		for(int i=0; i<4; i++)
 		{
-			count += mPlayers[(mCurWinner+i)%4].SetContract(trump, count);
+			Contract contract = mPlayers[(mCurWinner+i)%4].SetContract(trump, count);
+			count += contract.Level();
+			UI.Log(Severity.INFO, "Game::SetContract", mPlayers[(mCurWinner+i)%4].toString() + " contract: " + contract + " (Total=" + count + ")");
 		}
 	}
 
 	private void playing()
 	{
- /*       UI.log("Game", "in playing");
+ /*       UI.Log(Severity.INFO, "Game", "in playing");
 
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
-            UI.log("Game::Playing", "Trying to create a card button");
+            UI.Log(Severity.INFO, "Game::Playing", "Trying to create a card button");
 
             UI.createCardButton(mPlayers[0], i);
         }
@@ -128,10 +136,10 @@ public class Game{
 
 	}
 
-    public void getRoundCards(Card one, Card two, Card three, Card four, int ruler){
-		UI.log("getRoundCards", "Heyo I'm in getRoundCards");
+    public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
+		UI.Log(Severity.INFO, "getRoundCards", "Heyo I'm in getRoundCards");
 
-		Card winner = Card.Compare(one, two, three, four, ruler);
+		Card winner = Card.Compare(one, two, three, four, trump);
 		if(winner.equals(one)){
 			mPlayers[0].UpdateScore(1);
 		}else if(winner.equals(two)){

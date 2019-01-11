@@ -1,6 +1,11 @@
 package com.example.s243476.whist;
 
-public class CardSuit 
+enum CardSuit 
+{
+	CL, DI, HE, SP, NT; 
+}
+/*
+public class CardSuit implements Comparable<CardSuit>
 {
 	final String[] mStr = { "CL", "DI", "HE", "SP", "NT" };
 	int mValue;
@@ -15,7 +20,14 @@ public class CardSuit
 		return mValue;
 	}
 
+	@Override
+	public int compareTo(CardSuit two) 
+	{
+		return this.mValue - ((CardSuit)two).mValue;
+	}
+	
     public String toString(){
         return mStr[mValue];
     }
 }
+*/

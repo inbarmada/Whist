@@ -5,15 +5,16 @@ public class Contract
     int      mLevel;
     CardSuit mTrump;
 
-	public Contract(int trump, int level)
+
+	public Contract(CardSuit trump, int level)
 	{
-        mTrump = new CardSuit(trump);
+        mTrump = trump;
         mLevel = level;
     }
-		
-	public int Trump()
+	
+	public CardSuit Trump()
 	{
-		return mTrump.indexOf();
+		return mTrump;
 	}
 	
 	public int Level()
@@ -21,6 +22,12 @@ public class Contract
 		return mLevel;
 	}
 
+    @Override
+    public boolean equals(Object cmp) 
+    {
+		return((this.mTrump == ((Contract)cmp).mTrump) && (this.mLevel == ((Contract)cmp).mLevel));
+	}
+	
     public String toString(){
         return mTrump.toString() + " (" + mLevel + ")";
     }
