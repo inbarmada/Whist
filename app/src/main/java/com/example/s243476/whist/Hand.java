@@ -9,7 +9,7 @@ class Hand {
     public Hand()
 	{
 		int i;
-		mCardsBySuit = new ArrayList[4];
+		mCardsBySuit = new ArrayList<Card>[4];
 		for(i=0; i<4; i++)
 		{
 			mCardsBySuit[i] = new ArrayList<Card>();
@@ -55,7 +55,7 @@ class Hand {
 			return 0;
 		boolean isTrump = (trump == cards.get(0).Suit());
 		boolean isNoTrump = (trump == CardSuit.NT);
-		
+
 		int eval = 0;
 		for(int i=0; i<size; i++)
 		{
@@ -65,29 +65,29 @@ class Hand {
 			{
 				if(isTrump || isNoTrump || (rank > 9))
 				{
-					eval++;	
+					eval++;
 				}
 			}
-			else 
+			else
 			{
 				if (isTrump && i > 3)
 				{
 					eval ++;
-				}		
+				}
 			}
 		}
 		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
 		return eval;
 	}
-	
+
 	public Contract Evaluate(Contract curContract)
 	{
 		CardSuit curTrump = curContract.Trump();
 		int curEvaluation = curContract.Level();
-		
+
 		int update = 0;
-		
-		
+
+
 		for(int trumpId =0; trumpId <5; trumpId ++)
 		{
 			CardSuit trump = CardSuit.values()[trumpId];
@@ -115,7 +115,7 @@ class Hand {
 		else
 		{
 			return curContract;
-		}	
+		}
 	}
 
 	public int SetContract(CardSuit trump, int count)
@@ -130,7 +130,7 @@ class Hand {
 		return eval;
 	}
 
-	
+
     //Choose a card if automatic
     public Card Choose(CardSuit suit)
 	{
@@ -151,11 +151,11 @@ class Hand {
 
     //return a list of all cards to show the (non-automatic) player
     public ArrayList<Card> showCards(){
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "showCards", "Heyo I'm in showCards");
+        UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::showCards", "return cards");
 
         return mCardsBySuit[0];
     }
-	
+
     public String toString()
 	{
 		String str = "";

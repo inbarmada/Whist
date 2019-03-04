@@ -53,7 +53,7 @@ public class Game{
        // com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Deal the deck");
         deck.Deal(Hands);
 		Debug();
-		
+
         com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
         Bidding();
 
@@ -86,7 +86,7 @@ public class Game{
 					com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
 					passTable[i%4] = 1;
 					passCount ++;
-				}					
+				}
 				else
 				{
 					curContract = newContract;
@@ -107,7 +107,7 @@ public class Game{
 			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "No Winner");
 		}
 	}
-	
+
 	private void ContractsSetting()
 	{
 		CardSuit trump = mCurContract.Trump();
@@ -122,14 +122,13 @@ public class Game{
 
 	private void playing()
 	{
- /*       UI.Log(Severity.INFO, "Game", "in playing");
+        UI.Log(Severity.INFO, "Game", "in playing");
 
         for(final Card i : mPlayers[0].mCurHand.showCards()) {
             UI.Log(Severity.INFO, "Game::Playing", "Trying to create a card button");
-
-            UI.createCardButton(mPlayers[0], i);
+						System.out.println(i);
         }
-*/
+
 	}
 
 	public void playerOneChose(Card one){
