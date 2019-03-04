@@ -2,7 +2,7 @@ package com.example.s243476.whist;
 
 import java.lang.String;
 
-public class Player 
+public abstract class Player
 {
 	// Player Profile
 	int    mAuto;
@@ -21,7 +21,7 @@ public class Player
         mName = "auto" + mId++;
         mTotalScore = 0;
     }
-	
+
 	public Player(String name)
 	{
 		mAuto = 0;
@@ -37,12 +37,12 @@ public class Player
 	{
 		return mCurHand.Choose();
 	}
-	
+
 	public String Name()
 	{
 		return mName;
     }
-	
+
 	public int TotalScore()
 	{
 		return mTotalScore;
@@ -53,33 +53,26 @@ public class Player
 		return mTotalScore += gameScore;
     }
 
-    public Contract Bid(Contract curContract)
-	{
-		mCurContract = mCurHand.Evaluate(curContract);
-		UI.Log(Severity.DEBUG, "Player::Bid", this + ": " + mCurHand + "(" + mCurContract + ")");
-		return mCurContract;
+    public abstract Contract Bid(Contract curContract);
+
+    public Contract SetContract(CardSuit trump, int count){
+			if(count != 0)
+			{
+				int level = mCurHand.SetContract(trump, count);
+				mCurContract = new Contract(trump, level);
+			}
+
+			UI.Log(Severity.DEBUG, "Player::SetContract", this.toString() + ", " + mCurContract);
+			return mCurContract;
     }
-    public Contract SetContract(CardSuit trump, int count)
-	{
-		if(count != 0)
-		{
-			int level = mCurHand.SetContract(trump, count);
-			mCurContract = new Contract(trump, level);
-		}
-			
-		UI.Log(Severity.DEBUG, "Player::SetContract", this.toString() + ", " + mCurContract);
-		return mCurContract;
+
+    public int DebugInfo(){
+			UI.Log(Severity.DEBUG, ".....Player::DebugInfo", this + ": " + mCurHand);
+			return 0;
     }
-	
-    public int DebugInfo()
-	{
-		UI.Log(Severity.DEBUG, ".....Player::DebugInfo", this + ": " + mCurHand);
-		return 0;
+
+    public String toString(){
+			return mName + "(" + mTotalScore + ")";
     }
-	
-    public String toString()
-	{
-		return mName + "(" + mTotalScore + ")";
-    }
-	
+
 }

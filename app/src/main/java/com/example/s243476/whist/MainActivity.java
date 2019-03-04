@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         log("In MainActivity", "In StartIt");
 		// Intent start = new Intent(this, Game.class);
 		// startActivity(start);
-		Player p1 = new Player("Johnson");
-		Player p2 = new Player();
-		Player p3 = new Player();
-		Player p4 = new Player();
+		Player p1 = new AutoPlayer("Johnson");
+		Player p2 = new AutoPlayer();
+		Player p3 = new AutoPlayer();
+		Player p4 = new AutoPlayer();
 
         log("In MainActivity", "Have Created Players");
 
