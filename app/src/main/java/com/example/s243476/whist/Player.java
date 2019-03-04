@@ -15,41 +15,35 @@ public abstract class Player
 
 	static int mAutoId;
 
-	public Player()
-	{
+	public Player(){
 		mAuto = 1;
         mName = "auto" + mId++;
         mTotalScore = 0;
     }
 
-	public Player(String name)
-	{
+	public Player(String name){
 		mAuto = 0;
         mName = name;
         mTotalScore = 0;
-    }
+  }
 
-    public void SetHand(Hand h){
-	    mCurHand = h;
-    }
+  public void SetHand(Hand h){
+    mCurHand = h;
+  }
 
-    public Card Choose()
-	{
+  public Card Choose(){
 		return mCurHand.Choose();
 	}
 
-	public String Name()
-	{
+	public String Name(){
 		return mName;
     }
 
-	public int TotalScore()
-	{
+	public int TotalScore(){
 		return mTotalScore;
     }
 
-	public int UpdateScore(int gameScore)
-	{
+	public int UpdateScore(int gameScore){
 		return mTotalScore += gameScore;
     }
 

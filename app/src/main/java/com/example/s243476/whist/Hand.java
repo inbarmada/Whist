@@ -40,7 +40,7 @@ class Hand {
 		}
 	}
 
-	public Card Choose()
+	public Card Choose(Card[] roundCards, CardSuit trump)
 	{
 		Card c = mCardsBySuit[0].get(0);
         //UI.Log(Severity.DEBUG, "choose(c)", c.toString());

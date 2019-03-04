@@ -8,8 +8,7 @@ public class Game{
 	int mNextToPlay = 0;
 	int mNextToBet = 0;
 
-	public Game(Player p1, Player p2, Player p3, Player p4)
-	{
+	public Game(Player p1, Player p2, Player p3, Player p4){
 		mPlayers[0] = p1;
 		mPlayers[1] = p2;
 		mPlayers[2] = p3;
@@ -19,15 +18,14 @@ public class Game{
 
 	}
 
-	public void Play(int numOfRounds)
-	{
+	public void Play(int numOfRounds){
 	    for(int i=0; i < numOfRounds; i++)
 		{
 			Play1Round();
 		}
 	}
-	private void Debug()
-	{
+
+	private void Debug(){
 		int i;
 		for(i=0; i<4; i++)
 		{
@@ -35,8 +33,8 @@ public class Game{
 		}
 
 	}
-    private void Play1Round()
-	{
+
+	private void Play1Round(){
 		int i;
 		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Starting...");
         Deck deck = new Deck();
@@ -64,8 +62,8 @@ public class Game{
         playing();
 
     }
-	private void Bidding()
-	{
+
+	private void Bidding(){
 		int i = mNextToBet % 4;
 		mNextToBet ++;
 		int passCount = 0;
@@ -108,8 +106,7 @@ public class Game{
 		}
 	}
 
-	private void ContractsSetting()
-	{
+	private void ContractsSetting(){
 		CardSuit trump = mCurContract.Trump();
 		int count = 0;
 		for(int i=0; i<4; i++)
@@ -120,22 +117,18 @@ public class Game{
 		}
 	}
 
-	private void playing()
-	{
+	private void playing(){
         UI.Log(Severity.INFO, "Game", "in playing");
 
-        for(final Card i : mPlayers[0].mCurHand.showCards()) {
-            UI.Log(Severity.INFO, "Game::Playing", "Trying to create a card button");
-						System.out.println(i);
-        }
+        ArrayList<Card> round Cards = new ArrayList<Card>();
+				roundCards(mPlayers[0].choose());
 
 	}
 
 	public void playerOneChose(Card one){
-
 	}
 
-    public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
+  public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
 		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "getRoundCards", "Heyo I'm in getRoundCards");
 
 		Card winner = Card.Compare(one, two, three, four, trump);
@@ -147,7 +140,7 @@ public class Game{
 		   mPlayers[2].UpdateScore(1);
 		}else if(winner.equals(four)){
 		   mPlayers[3].UpdateScore(1);
-	   }
-    }
+	  }
+  }
 
 }

@@ -10,15 +10,11 @@ public class AutoPlayer extends Player
   		return mCurContract;
     }
 
-
-
-  	public AutoPlayer()
-  	{
+  	public AutoPlayer(){
   		super();
       }
 
-  	public AutoPlayer(String name)
-  	{
+  	public AutoPlayer(String name){
   		super(name);
       }
 
