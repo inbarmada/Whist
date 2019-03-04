@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 		Game mGame;
-        UI.Log(Severity.DEBUG, "MainSDK::main", "Starting...");
+		UI.Log(Severity.DEBUG, "MainSDK::main", "Starting...");
 
  		Player p1 = new Player("Johnson");
 		Player p2 = new Player();

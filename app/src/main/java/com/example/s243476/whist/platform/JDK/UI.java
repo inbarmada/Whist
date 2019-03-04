@@ -12,7 +12,7 @@ public class UI {
 
     static void Log(Severity sev, String str1, String str2)
     {
-		if(sev.ordinal() >= Severity.INFO.ordinal())
+		if(sev.ordinal() >= Severity.DEBUG.ordinal())
 		{
 			System.out.println(str1 + " " + str2);
 		}

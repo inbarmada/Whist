@@ -1,5 +1,6 @@
 package com.example.s243476.whist;
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0) {
                 log("onClick", "Heyo I'm in onClick");
-                Card chosenOne = one.choose(i);
-                int type = chosenOne.mType;
-                game.playerOneChose(chosenOne);
+                //Card chosenOne = one.choose(i);
+                //int type = chosenOne.mType;
+                //game.playerOneChose(chosenOne);
             }
         });
         log("In MainActivity", "created listener");

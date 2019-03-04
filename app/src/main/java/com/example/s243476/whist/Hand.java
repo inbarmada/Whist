@@ -43,7 +43,7 @@ class Hand {
 	public Card Choose()
 	{
 		Card c = mCardsBySuit[0].get(0);
-        UI.Log(Severity.DEBUG, "choose(c)", c.toString());
+        //UI.Log(Severity.DEBUG, "choose(c)", c.toString());
         Remove(c);
         return c;
     }
@@ -76,7 +76,7 @@ class Hand {
 				}		
 			}
 		}
-		UI.Log(Severity.DEBUG, "Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
+		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
 		return eval;
 	}
 	
@@ -91,13 +91,13 @@ class Hand {
 		for(int trumpId =0; trumpId <5; trumpId ++)
 		{
 			CardSuit trump = CardSuit.values()[trumpId];
-			UI.Log(Severity.DEBUG, "Hand::Evalute", "Trump: "+ trump);
+			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::Evalute", "Trump: "+ trump);
 			int eval = 0;
 			for(int suit=0; suit<4; suit++)
 			{
 				eval += EvaluteSuit(mCardsBySuit[suit], trump);
 			}
-			UI.Log(Severity.DEBUG, "Hand::Evalute", trump.toString() + " -> " +  eval);
+			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::Evalute", trump.toString() + " -> " +  eval);
 
 			if((eval > curEvaluation) || ((eval == curEvaluation) && (trump.compareTo(curTrump) > 0)))
 			{
@@ -121,7 +121,7 @@ class Hand {
 	public int SetContract(CardSuit trump, int count)
 	{
 		int eval = 0;
-		UI.Log(Severity.DEBUG, "Hand::SetContract", "start...");
+		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::SetContract", "start...");
 
 		for(int suit=0; suit<4; suit++)
 		{
@@ -135,15 +135,15 @@ class Hand {
     public Card Choose(CardSuit suit)
 	{
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-        UI.Log(Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
+        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
 
         for(int i = cards.size() - 1; i >= 0; i--){
-            UI.Log(Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
+            com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
 
             if(cards.get(i).Suit() == suit){
                 return cards.remove(i);
             }
-            UI.Log(Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
+            com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
 
         }
         return cards.remove(0);
@@ -151,7 +151,7 @@ class Hand {
 
     //return a list of all cards to show the (non-automatic) player
     public ArrayList<Card> showCards(){
-        UI.Log(Severity.DEBUG, "showCards", "Heyo I'm in showCards");
+        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "showCards", "Heyo I'm in showCards");
 
         return mCardsBySuit[0];
     }
