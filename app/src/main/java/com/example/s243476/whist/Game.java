@@ -58,8 +58,9 @@ public class Game{
         com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
         ContractsSetting();
 
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing...");
-        playing();
+        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing!..");
+				System.out.println("hi");
+				playing();
 
     }
 
@@ -118,10 +119,18 @@ public class Game{
 	}
 
 	private void playing(){
-        UI.Log(Severity.INFO, "Game", "in playing");
+				System.out.println("hi");
+        UI.Log(Severity.INFO, "Game::Playing", "in playing! In here");
 
-        ArrayList<Card> round Cards = new ArrayList<Card>();
-				roundCards(mPlayers[0].choose());
+        Card[] roundCards = new Card[4];
+				Card c = mPlayers[0].choose(mCurContract.trump());
+				UI.Log(Severity.INFO, "Game", "Chose c " + c);
+
+				roundCards[0] = c;
+				roundCards[1] = mPlayers[1].choose(roundCards, c.Suit(), trump);
+				roundCards[2] = mPlayers[2].choose(roundCards, c.Suit(), trump);
+				roundCards[3] = mPlayers[3].choose(roundCards, c.Suit(), trump);
+				UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.print(roundCards));
 
 	}
 

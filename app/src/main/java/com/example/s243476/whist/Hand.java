@@ -6,33 +6,30 @@ import java.util.Collections;
 class Hand {
 	ArrayList<Card>[]  mCardsBySuit;
 
-    public Hand()
-	{
+  public Hand(){
 		int i;
 		mCardsBySuit = new ArrayList<Card>[4];
 		for(i=0; i<4; i++)
 		{
 			mCardsBySuit[i] = new ArrayList<Card>();
 		}
-    }
+  }
 
-    //Add a card to mCards (for use when dealt a card)
-    public void Add(Card c)
-	{
+  //Add a card to mCards (for use when dealt a card)
+  public void Add(Card c){
 		//UI.Log(Severity.DEBUG, "Hand::Add", "CARD="+card);
-        mCardsBySuit[c.Suit().ordinal()].add(c);
-    }
+    mCardsBySuit[c.Suit().ordinal()].add(c);
+  }
 
 
-    //Choose a card, if not automatic
-    public void Remove(Card c)
-	{
+  //Choose a card, if not automatic
+  public Card Remove(Card c){
 		//UI.Log(Severity.DEBUG, "Hand::Remove", "CARD="+card);
-        mCardsBySuit[c.Suit().ordinal()].remove(c);
-    }
+    mCardsBySuit[c.Suit().ordinal()].remove(c);
+		return c;
+  }
 
-	public void Sort()
-	{
+	public void Sort(){
 		int i;
 		for(i=0; i<4; i++)
 		{
@@ -40,16 +37,34 @@ class Hand {
 		}
 	}
 
-	public Card Choose(Card[] roundCards, CardSuit trump)
-	{
-		Card c = mCardsBySuit[0].get(0);
-        //UI.Log(Severity.DEBUG, "choose(c)", c.toString());
-        Remove(c);
-        return c;
-    }
+	public Card Choose(CardSuit trump){
+		int index = 0;
+		int max = 0;
+		for(int i = 0; i < 4; i++){
+			if(max < mCardsBySuit[i].size()){
+				max = mCardsBySuit[i].size();
+				index = i;
+			}
+		}
+		return Remove(mCardsBySuit[index].get(max - 1));
+	}
+	//Choose a card if automatic
+	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
+		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
 
-	public int EvaluteSuit(ArrayList<Card> cards, CardSuit trump)
-	{
+		//Check if have the suit in use
+		Card c;
+		if(!cards.isEmpty()){
+			c = cards.get(cards.size() - 1);
+			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
+		}else{
+			c = cards.get(0);
+		}
+		Remove(c);
+    return c;
+  }
+
+	public int EvaluteSuit(ArrayList<Card> cards, CardSuit trump){
 		int size = cards.size();
 		if (size == 0)
 			return 0;
@@ -80,8 +95,7 @@ class Hand {
 		return eval;
 	}
 
-	public Contract Evaluate(Contract curContract)
-	{
+	public Contract Evaluate(Contract curContract){
 		CardSuit curTrump = curContract.Trump();
 		int curEvaluation = curContract.Level();
 
@@ -118,8 +132,7 @@ class Hand {
 		}
 	}
 
-	public int SetContract(CardSuit trump, int count)
-	{
+	public int SetContract(CardSuit trump, int count){
 		int eval = 0;
 		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::SetContract", "start...");
 
@@ -131,33 +144,31 @@ class Hand {
 	}
 
 
-    //Choose a card if automatic
-    public Card Choose(CardSuit suit)
-	{
+  //Choose a card if automatic
+	/*
+  public Card Choose(CardSuit suit){
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
+    com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
 
-        for(int i = cards.size() - 1; i >= 0; i--){
-            com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
+    for(int i = cards.size() - 1; i >= 0; i--){
+        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
 
-            if(cards.get(i).Suit() == suit){
-                return cards.remove(i);
-            }
-            com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
-
+        if(cards.get(i).Suit() == suit){
+            return cards.remove(i);
         }
-        return cards.remove(0);
+        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
+
     }
+    return cards.remove(0);
+	}*/
 
-    //return a list of all cards to show the (non-automatic) player
-    public ArrayList<Card> showCards(){
-        UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::showCards", "return cards");
+  //return a list of all cards to show the (non-automatic) player
+  public ArrayList<Card> showCards(){
+    UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::showCards", "return cards");
+    return mCardsBySuit[0];
+  }
 
-        return mCardsBySuit[0];
-    }
-
-    public String toString()
-	{
+  public String toString(){
 		String str = "";
 		int cntr = 1;
         for(int suit = 0; suit < 4; suit++)
