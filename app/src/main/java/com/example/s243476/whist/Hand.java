@@ -50,15 +50,16 @@ class Hand {
 	}
 	//Choose a card if automatic
 	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
-		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
 
+		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
 		//Check if have the suit in use
 		Card c;
 		if(!cards.isEmpty()){
 			c = cards.get(cards.size() - 1);
 			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
 		}else{
-			c = cards.get(0);
+			//MUST FIX this to decide what to do if the chosen suit is empty
+			c = mCardsBySuit[trump.ordinal()].get(0);
 		}
 		Remove(c);
     return c;

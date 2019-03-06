@@ -1,4 +1,5 @@
 package com.example.s243476.whist;
+import java.util.*;
 
 public class Game{
 
@@ -59,7 +60,6 @@ public class Game{
         ContractsSetting();
 
         com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing!..");
-				System.out.println("hi");
 				playing();
 
     }
@@ -119,20 +119,35 @@ public class Game{
 	}
 
 	private void playing(){
-				System.out.println("hi");
-        UI.Log(Severity.INFO, "Game::Playing", "in playing! In here");
+        UI.Log(Severity.INFO, "Game::Playing", "in playing");
 
-        Card[] roundCards = new Card[4];
-				CardSuit trump = mCurContract.Trump();
+				//Play 13 rounds
+				for(int i = 0; i < 13; i++){
+					//Each person chooses a card and adds it to roundCards
+	        Card[] roundCards = new Card[4];
+					CardSuit trump = mCurContract.Trump();
 
-				Card c = mPlayers[0].Choose(trump);
-				UI.Log(Severity.INFO, "Game", "Chose c " + c);
+					Card c = mPlayers[0].Choose(trump);
+					UI.Log(Severity.INFO, "Game", "Chose c " + c);
 
-				roundCards[0] = c;
-				roundCards[1] = mPlayers[1].Choose(roundCards, c.Suit(), trump);
-				roundCards[2] = mPlayers[2].Choose(roundCards, c.Suit(), trump);
-				roundCards[3] = mPlayers[3].Choose(roundCards, c.Suit(), trump);
-				UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + roundCards);
+					roundCards[0] = c;
+					roundCards[1] = mPlayers[1].Choose(roundCards, c.Suit(), trump);
+					roundCards[2] = mPlayers[2].Choose(roundCards, c.Suit(), trump);
+					roundCards[3] = mPlayers[3].Choose(roundCards, c.Suit(), trump);
+					UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.toString(roundCards));
+					//roundCards has been filled
+
+					//Choose winner and update scores
+					getRoundCards(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump);
+					UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.toString(roundCards));
+
+					//Print scores
+					for(Player player : mPlayers){
+						System.out.println(player + "Total score is: " + player.TotalScore());
+					}
+				}
+
+
 
 	}
 
@@ -140,7 +155,7 @@ public class Game{
 	}
 
   public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
-		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "getRoundCards", "Heyo I'm in getRoundCards");
+		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
 
 		Card winner = Card.Compare(one, two, three, four, trump);
 		if(winner.equals(one)){
