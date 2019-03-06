@@ -123,14 +123,16 @@ public class Game{
         UI.Log(Severity.INFO, "Game::Playing", "in playing! In here");
 
         Card[] roundCards = new Card[4];
-				Card c = mPlayers[0].choose(mCurContract.trump());
+				CardSuit trump = mCurContract.Trump();
+
+				Card c = mPlayers[0].Choose(trump);
 				UI.Log(Severity.INFO, "Game", "Chose c " + c);
 
 				roundCards[0] = c;
-				roundCards[1] = mPlayers[1].choose(roundCards, c.Suit(), trump);
-				roundCards[2] = mPlayers[2].choose(roundCards, c.Suit(), trump);
-				roundCards[3] = mPlayers[3].choose(roundCards, c.Suit(), trump);
-				UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.print(roundCards));
+				roundCards[1] = mPlayers[1].Choose(roundCards, c.Suit(), trump);
+				roundCards[2] = mPlayers[2].Choose(roundCards, c.Suit(), trump);
+				roundCards[3] = mPlayers[3].Choose(roundCards, c.Suit(), trump);
+				UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + roundCards);
 
 	}
 

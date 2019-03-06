@@ -32,7 +32,11 @@ public abstract class Player
   }
 
   public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
-		return mCurHand.Choose(oundCards, suit, trump);
+		return mCurHand.Choose(roundCards, suit, trump);
+	}
+
+	public Card Choose(CardSuit trump){
+		return mCurHand.Choose(trump);
 	}
 
 	public String Name(){
