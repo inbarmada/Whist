@@ -8,7 +8,7 @@ class Hand {
 
   public Hand(){
 		int i;
-		mCardsBySuit = new ArrayList<Card>[4];
+		mCardsBySuit = new ArrayList[4];
 		for(i=0; i<4; i++)
 		{
 			mCardsBySuit[i] = new ArrayList<Card>();
