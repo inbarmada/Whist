@@ -36,7 +36,7 @@ public abstract class Player
 	}
 
 	public Card Choose(CardSuit trump){
-		return mCurHand.Choose(trump);
+		return mCurHand.Choose(/*trump*/);
 	}
 
 	public String Name(){

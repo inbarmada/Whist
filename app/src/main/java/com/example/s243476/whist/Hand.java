@@ -51,21 +51,18 @@ class Hand {
 
 	//Choose a card if automatic
 	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
+		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
+		UI.Log(Severity.INFO, "Hand::Choose", "1");
+		//Check if have the suit in use
+		Card c = null;
+		if(!cards.isEmpty()){
+			c = cards.get(cards.size() - 1);
+			UI.Log(Severity.INFO, "Hand::Choose", "2");
 
-		if(suit.ordinal() == 5){
+			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
+		}
 
-		}else{
-			ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-			UI.Log(Severity.INFO, "Hand::Choose", "1");
-
-			//Check if have the suit in use
-			Card c = null;
-			if(!cards.isEmpty()){
-				c = cards.get(cards.size() - 1);
-				UI.Log(Severity.INFO, "Hand::Choose", "2");
-
-				//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
-			}else{
+		else if(trump.ordinal() != 4){
 				//Check if you have trumps
 				if(!mCardsBySuit[trump.ordinal()].isEmpty()){
 					UI.Log(Severity.INFO, "Hand::Choose", "3");
@@ -73,12 +70,17 @@ class Hand {
 					//Check if a trump has been placed, and if so check what the max is
 					int maxTrump = 0;
 					for(Card i : roundCards){
-						if(i.Suit().ordinal() == trump.ordinal())
+						if(i == null)
+							break;
+						UI.Log(Severity.ERROR, "Hand::Choose", "yeah here" + i.Suit().ordinal());
+						UI.Log(Severity.ERROR, "Hand::Choose", "yeah trump" + trump.ordinal());
+						if(i.Suit().ordinal() == trump.ordinal()){
 						System.out.println(i);
-							if(i.Rank() > maxTrump)
+							if(i.Rank() > maxTrump){
 								maxTrump = i.Rank();
-								UI.Log(Severity.INFO, "Hand::Choose", "4");
-
+							}
+							UI.Log(Severity.INFO, "Hand::Choose", "4");
+						}
 					}
 					for(Card i : mCardsBySuit[trump.ordinal()]){
 						if(i.Rank() > maxTrump){
@@ -105,9 +107,15 @@ class Hand {
 				}
 
 
+			}if(c == null){
+				for(int i = 0; i < 4; i++){
+					if(mCardsBySuit[i].size() != 0){
+						c = mCardsBySuit[i].get(mCardsBySuit[i].size() - 1);
+					}
+				}
 			}
-		UI.Log(Severity.INFO, "Hand::Choose", "8");
-		}
+		UI.Log(Severity.INFO, "Hand::Choose", "8" + (c == null));
+
 		Remove(c);
     return c;
   }

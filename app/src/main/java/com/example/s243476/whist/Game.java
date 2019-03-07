@@ -147,7 +147,7 @@ public class Game{
 						System.out.println(player + "Total score is: " + player.TotalScore());
 					}
 				}
-
+				winner();
 
 
 	}
@@ -170,4 +170,16 @@ public class Game{
 	  }
   }
 
+	public void winner(){
+		int index = -1;
+		int maxPoints = 0;
+		for(int i = 0; i < 4; i++){
+			if(mPlayers[i].TotalScore() > maxPoints){
+				maxPoints = mPlayers[i].TotalScore();
+				index = i;
+			}
+		}
+		UI.Log(Severity.INFO, "Game::winner", "Round over. Winner is: " + mPlayers[index]);
+
+	}
 }
