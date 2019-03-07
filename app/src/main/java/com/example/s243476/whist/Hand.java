@@ -37,7 +37,7 @@ class Hand {
 		}
 	}
 
-	public Card Choose(CardSuit trump){
+	public Card Choose(/*CardSuit trump*/){
 		int index = 0;
 		int max = 0;
 		for(int i = 0; i < 4; i++){
@@ -48,18 +48,65 @@ class Hand {
 		}
 		return Remove(mCardsBySuit[index].get(max - 1));
 	}
+
 	//Choose a card if automatic
 	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
 
-		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-		//Check if have the suit in use
-		Card c;
-		if(!cards.isEmpty()){
-			c = cards.get(cards.size() - 1);
-			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
+		if(suit.ordinal() == 5){
+
 		}else{
-			//MUST FIX this to decide what to do if the chosen suit is empty
-			c = mCardsBySuit[trump.ordinal()].get(0);
+			ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
+			UI.Log(Severity.INFO, "Hand::Choose", "1");
+
+			//Check if have the suit in use
+			Card c = null;
+			if(!cards.isEmpty()){
+				c = cards.get(cards.size() - 1);
+				UI.Log(Severity.INFO, "Hand::Choose", "2");
+
+				//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
+			}else{
+				//Check if you have trumps
+				if(!mCardsBySuit[trump.ordinal()].isEmpty()){
+					UI.Log(Severity.INFO, "Hand::Choose", "3");
+
+					//Check if a trump has been placed, and if so check what the max is
+					int maxTrump = 0;
+					for(Card i : roundCards){
+						if(i.Suit().ordinal() == trump.ordinal())
+						System.out.println(i);
+							if(i.Rank() > maxTrump)
+								maxTrump = i.Rank();
+								UI.Log(Severity.INFO, "Hand::Choose", "4");
+
+					}
+					for(Card i : mCardsBySuit[trump.ordinal()]){
+						if(i.Rank() > maxTrump){
+							c = i;
+							break;
+						}
+						UI.Log(Severity.INFO, "Hand::Choose", "5");
+
+					}
+				}else{
+					UI.Log(Severity.INFO, "Hand::Choose", "6");
+
+					int min = 13;
+					for(ArrayList<Card> i : mCardsBySuit){
+						if(i.isEmpty())
+							break;
+						if(i.get(0).Suit().ordinal() == trump.ordinal())
+							break;
+						if(i.get(0).Rank() < min)
+							c = i.get(0);
+						UI.Log(Severity.INFO, "Hand::Choose", "7");
+
+					}
+				}
+
+
+			}
+		UI.Log(Severity.INFO, "Hand::Choose", "8");
 		}
 		Remove(c);
     return c;

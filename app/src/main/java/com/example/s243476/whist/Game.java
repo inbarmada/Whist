@@ -119,13 +119,14 @@ public class Game{
 	}
 
 	private void playing(){
-        UI.Log(Severity.INFO, "Game::Playing", "in playing");
+				UI.Log(Severity.INFO, "Game::Playing", "in playing");
 
 				//Play 13 rounds
 				for(int i = 0; i < 13; i++){
 					//Each person chooses a card and adds it to roundCards
 	        Card[] roundCards = new Card[4];
 					CardSuit trump = mCurContract.Trump();
+					UI.Log(Severity.INFO, "Game::Playing", "trump" + trump + trump.ordinal());
 
 					Card c = mPlayers[0].Choose(trump);
 					UI.Log(Severity.INFO, "Game", "Chose c " + c);
