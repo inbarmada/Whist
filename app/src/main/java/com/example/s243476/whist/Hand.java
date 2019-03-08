@@ -2,6 +2,7 @@ package com.example.s243476.whist;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 class Hand {
 	ArrayList<Card>[]  mCardsBySuit;
@@ -21,7 +22,6 @@ class Hand {
     mCardsBySuit[c.Suit().ordinal()].add(c);
   }
 
-
   //Choose a card, if not automatic
   public Card Remove(Card c){
 		//UI.Log(Severity.DEBUG, "Hand::Remove", "CARD="+card);
@@ -35,6 +35,18 @@ class Hand {
 		{
 			Collections.sort(mCardsBySuit[i]);
 		}
+	}
+
+	public Card realChoose(Card[] roundCards){
+		System.out.println("PlayedCards " + (roundCards));
+		System.out.println("Your hand " + toString());
+		Scanner kb = new Scanner(System.in);
+		int i = kb.nextInt();
+		int j = kb.nextInt();
+
+		Card c = mCardsBySuit[i].get(j);
+		Remove(c);
+		return c;
 	}
 
 	public Card Choose(/*CardSuit trump*/){
@@ -52,12 +64,10 @@ class Hand {
 	//Choose a card if automatic
 	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-		UI.Log(Severity.INFO, "Hand::Choose", "1");
 		//Check if have the suit in use
 		Card c = null;
 		if(!cards.isEmpty()){
 			c = cards.get(cards.size() - 1);
-			UI.Log(Severity.INFO, "Hand::Choose", "2");
 
 			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
 		}
@@ -65,21 +75,17 @@ class Hand {
 		else if(trump.ordinal() != 4){
 				//Check if you have trumps
 				if(!mCardsBySuit[trump.ordinal()].isEmpty()){
-					UI.Log(Severity.INFO, "Hand::Choose", "3");
 
 					//Check if a trump has been placed, and if so check what the max is
 					int maxTrump = 0;
 					for(Card i : roundCards){
 						if(i == null)
 							break;
-						UI.Log(Severity.ERROR, "Hand::Choose", "yeah here" + i.Suit().ordinal());
-						UI.Log(Severity.ERROR, "Hand::Choose", "yeah trump" + trump.ordinal());
 						if(i.Suit().ordinal() == trump.ordinal()){
 						System.out.println(i);
 							if(i.Rank() > maxTrump){
 								maxTrump = i.Rank();
 							}
-							UI.Log(Severity.INFO, "Hand::Choose", "4");
 						}
 					}
 					for(Card i : mCardsBySuit[trump.ordinal()]){
@@ -87,12 +93,8 @@ class Hand {
 							c = i;
 							break;
 						}
-						UI.Log(Severity.INFO, "Hand::Choose", "5");
-
 					}
 				}else{
-					UI.Log(Severity.INFO, "Hand::Choose", "6");
-
 					int min = 13;
 					for(ArrayList<Card> i : mCardsBySuit){
 						if(i.isEmpty())
@@ -101,7 +103,6 @@ class Hand {
 							break;
 						if(i.get(0).Rank() < min)
 							c = i.get(0);
-						UI.Log(Severity.INFO, "Hand::Choose", "7");
 
 					}
 				}
@@ -114,7 +115,6 @@ class Hand {
 					}
 				}
 			}
-		UI.Log(Severity.INFO, "Hand::Choose", "8" + (c == null));
 
 		Remove(c);
     return c;
@@ -198,7 +198,6 @@ class Hand {
 		}
 		return eval;
 	}
-
 
   //Choose a card if automatic
 	/*

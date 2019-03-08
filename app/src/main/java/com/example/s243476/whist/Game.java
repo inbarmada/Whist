@@ -5,7 +5,7 @@ public class Game{
 
 	Contract mCurContract;
 	int mCurWinner;
-    Player[] mPlayers = new Player[4];
+  Player[] mPlayers = new Player[4];
 	int mNextToPlay = 0;
 	int mNextToBet = 0;
 
@@ -128,7 +128,8 @@ public class Game{
 					CardSuit trump = mCurContract.Trump();
 					UI.Log(Severity.INFO, "Game::Playing", "trump" + trump + trump.ordinal());
 
-					Card c = mPlayers[0].Choose(trump);
+					//Card c = mPlayers[0].Choose(trump);
+					Card c = mPlayers[0].mCurHand.realChoose(roundCards);
 					UI.Log(Severity.INFO, "Game", "Chose c " + c);
 
 					roundCards[0] = c;
