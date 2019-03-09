@@ -137,7 +137,9 @@ class Hand {
 		int size = cards.size();
 		if (size == 0)
 			return 0;
+		//trump == current Suit
 		boolean isTrump = (trump == cards.get(0).Suit());
+		//trump = noTrump (no leading suit)
 		boolean isNoTrump = (trump == CardSuit.NT);
 
 		int eval = 0;
@@ -147,7 +149,7 @@ class Hand {
 			int rank = c.Rank();
 			if((rank + size) >= 13)
 			{
-				if(isTrump || isNoTrump || (rank > 9))
+				if(isTrump || isNoTrump)
 				{
 					eval++;
 				}
@@ -160,10 +162,11 @@ class Hand {
 				}
 			}
 		}
-		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
+		UI.Log(com.example.s243476.whist.Severity.DEBUG,"Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
 		return eval;
 	}
 
+	//for bid
 	public Contract Evaluate(Contract curContract){
 		CardSuit curTrump = curContract.Trump();
 		int curEvaluation = curContract.Level();
@@ -171,16 +174,18 @@ class Hand {
 		int update = 0;
 
 
-		for(int trumpId =0; trumpId <5; trumpId ++)
+		for(int trumpId =0; trumpId < 5; trumpId ++)
 		{
 			CardSuit trump = CardSuit.values()[trumpId];
-			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::Evalute", "Trump: "+ trump);
+			UI.Log(com.example.s243476.whist.Severity.DEBUG,
+				"Hand::Evalute", "Trump: "+ trump);
 			int eval = 0;
 			for(int suit=0; suit<4; suit++)
 			{
 				eval += EvaluteSuit(mCardsBySuit[suit], trump);
 			}
-			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::Evalute", trump.toString() + " -> " +  eval);
+			UI.Log(com.example.s243476.whist.Severity.DEBUG,
+				"Hand::Evalute", trump.toString() + " -> " +  eval);
 
 			if((eval > curEvaluation) || ((eval == curEvaluation) && (trump.compareTo(curTrump) > 0)))
 			{
@@ -203,7 +208,7 @@ class Hand {
 
 	public int SetContract(CardSuit trump, int count){
 		int eval = 0;
-		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::SetContract", "start...");
+		UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::SetContract", "start...");
 
 		for(int suit=0; suit<4; suit++)
 		{
@@ -216,15 +221,15 @@ class Hand {
 	/*
   public Card Choose(CardSuit suit){
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-    com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
+    UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
 
     for(int i = cards.size() - 1; i >= 0; i--){
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
+        UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
 
         if(cards.get(i).Suit() == suit){
             return cards.remove(i);
         }
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
+        UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
 
     }
     return cards.remove(0);

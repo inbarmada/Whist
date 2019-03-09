@@ -19,6 +19,15 @@ public class UI {
 			}
 		}
 
+		static void show()
+		{
+			//beginning
+			System.out.println("*************************************");
+
+			//end
+			System.out.println("*************************************");
+		}
+
 		static int readInt(){
 			Scanner kb = new Scanner(System.in);
 			return kb.nextInt();
