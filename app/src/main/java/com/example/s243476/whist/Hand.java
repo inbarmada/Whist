@@ -51,7 +51,6 @@ class Hand {
 				if(cntr == cardNum){
 					cntr ++;
 
-					System.out.println("--cntr : " + cntr + " --suit,i : " + suit + "," + i);
 					c = mCardsBySuit[suit].get(i);
 					break;
 				}

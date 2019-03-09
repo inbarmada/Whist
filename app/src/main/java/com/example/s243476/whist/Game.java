@@ -38,28 +38,27 @@ public class Game{
 	private void Play1Round(){
 		int i;
 		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Starting...");
-        Deck deck = new Deck();
-	    Hand[] Hands = new Hand[4];
+    Deck deck = new Deck();
+	  Hand[] Hands = new Hand[4];
 
-		for(i=0; i<4; i++)
-		{
+		for(i=0; i<4; i++){
 			Hands[i] = new Hand();
 			mPlayers[i].SetHand(Hands[i]);
 		}
-        //com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Created (Empty) Hand");
-
         //Deal the cards
-       // com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Deal the deck");
         deck.Deal(Hands);
-		Debug();
+				Debug();
 
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
+				//Bid
+        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
         Bidding();
 
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
+				//Set contract
+        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
         ContractsSetting();
 
-        com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing!..");
+				//Play rounds!
+        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing!..");
 				playing();
 
     }
@@ -179,7 +178,7 @@ public class Game{
 	}
 
   public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
-		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
+		UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
 
 		Card winner = Card.Compare(one, two, three, four, trump);
 		if(winner.equals(one)){
