@@ -174,9 +174,6 @@ public class Game{
 
 	}
 
-	public void playerOneChose(Card one){
-	}
-
   public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
 		UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
 
