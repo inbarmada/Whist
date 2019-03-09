@@ -41,20 +41,24 @@ class Hand {
 		System.out.println("PlayedCards " + Arrays.toString(roundCards));
 		System.out.println("Your hand " + toString());
 
-		int cardNum = UI.readInt() - 1;
-		int i = 0;
-		int j = 0;
-		while(cardNum > 0){
-			if(mCardsBySuit[i].size() > j){
-				j++;
-				cardNum--;
-			}else{
-				i++;
-				j=0;
+		int cardNum = UI.readInt();
+
+		Card c = null;
+
+		int cntr = 1;
+    for(int suit = 0; suit < 4; suit++){
+			for(int i = 0; i < mCardsBySuit[suit].size(); i++){
+				if(cntr == cardNum){
+					cntr ++;
+
+					System.out.println("--cntr : " + cntr + " --suit,i : " + suit + "," + i);
+					c = mCardsBySuit[suit].get(i);
+					break;
+				}
+				cntr ++;
+
 			}
 		}
-		System.out.println("i " + i + " j " + j);
-		Card c = mCardsBySuit[i].get(j);
 		Remove(c);
 		return c;
 	}
