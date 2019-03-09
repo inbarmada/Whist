@@ -120,24 +120,46 @@ public class Game{
 
 	private void playing(){
 				UI.Log(Severity.INFO, "Game::Playing", "in playing");
-
+				mCurWinner = 0;
 				//Play 13 rounds
 				for(int i = 0; i < 13; i++){
 					//Each person chooses a card and adds it to roundCards
 	        Card[] roundCards = new Card[4];
 					CardSuit trump = mCurContract.Trump();
-					UI.Log(Severity.INFO, "Game::Playing", "trump" + trump + trump.ordinal());
+					UI.Log(Severity.INFO, "Game::Playing", "trump " + trump + trump.ordinal());
 
-					//Card c = mPlayers[0].Choose(trump);
-					Card c = mPlayers[0].mCurHand.realChoose(roundCards);
-					UI.Log(Severity.INFO, "Game", "Chose c " + c);
+					int j = mCurWinner;
+					Card start = null;
+					UI.Log(Severity.INFO, "Game::Playing", "hi");
+					do{
 
-					roundCards[0] = c;
-					roundCards[1] = mPlayers[1].Choose(roundCards, c.Suit(), trump);
-					roundCards[2] = mPlayers[2].Choose(roundCards, c.Suit(), trump);
-					roundCards[3] = mPlayers[3].Choose(roundCards, c.Suit(), trump);
-					UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.toString(roundCards));
-					//roundCards has been filled
+						if(j%4 == 0){
+							//Card c = mPlayers[0].Choose(trump);
+							Card c = mPlayers[0].mCurHand.realChoose(roundCards);
+							UI.Log(Severity.INFO, "Game", "You chose " + c);
+							roundCards[0] = c;
+							if(j == mCurWinner)
+								start = c;
+						}
+						else{
+							if(start == null){
+								roundCards[j%4] = mPlayers[j%4].Choose();
+
+								start = roundCards[j%4];
+							}
+							else{
+								roundCards[j%4] = mPlayers[j%4].Choose(roundCards, start.Suit(), trump);
+
+							}
+
+
+						}
+							//roundCards has been filled
+							UI.Log(Severity.INFO, "Game::Playing", "hand:" + mPlayers[j%4].mCurHand + " - " + roundCards[j%4]);
+
+							j++;
+					}while(j%4 != (mCurWinner));
+					UI.Log(Severity.INFO, "Game::Playing", "-Chosen cards are:" + Arrays.toString(roundCards));
 
 					//Choose winner and update scores
 					getRoundCards(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump);
@@ -162,13 +184,17 @@ public class Game{
 		Card winner = Card.Compare(one, two, three, four, trump);
 		if(winner.equals(one)){
 			mPlayers[0].UpdateScore(1);
+			mCurWinner = 0;
 		}else if(winner.equals(two)){
 		   mPlayers[1].UpdateScore(1);
+			 mCurWinner = 1;
 		}else if(winner.equals(three)){
 		   mPlayers[2].UpdateScore(1);
+			 mCurWinner = 2;
 		}else if(winner.equals(four)){
 		   mPlayers[3].UpdateScore(1);
-	  }
+			 mCurWinner = 3;
+		 }
   }
 
 	public void winner(){

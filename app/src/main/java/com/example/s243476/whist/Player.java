@@ -35,7 +35,7 @@ public abstract class Player
 		return mCurHand.Choose(roundCards, suit, trump);
 	}
 
-	public Card Choose(CardSuit trump){
+	public Card Choose(){
 		return mCurHand.Choose(/*trump*/);
 	}
 

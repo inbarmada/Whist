@@ -1,6 +1,6 @@
 package com.example.s243476.whist;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -38,18 +38,27 @@ class Hand {
 	}
 
 	public Card realChoose(Card[] roundCards){
-		System.out.println("PlayedCards " + (roundCards));
+		System.out.println("PlayedCards " + Arrays.toString(roundCards));
 		System.out.println("Your hand " + toString());
-		Scanner kb = new Scanner(System.in);
-		int i = kb.nextInt();
-		int j = kb.nextInt();
 
+		int cardNum = UI.readInt();
+		int i = 0;
+		int j = 0;
+		while(cardNum > 0){
+			if(mCardsBySuit[i].size() > j){
+				j++;
+				cardNum--;
+			}else{
+				i++;
+			}
+
+		}
 		Card c = mCardsBySuit[i].get(j);
 		Remove(c);
 		return c;
 	}
 
-	public Card Choose(/*CardSuit trump*/){
+	public Card Choose(){
 		int index = 0;
 		int max = 0;
 		for(int i = 0; i < 4; i++){
