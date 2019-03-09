@@ -41,7 +41,7 @@ class Hand {
 		System.out.println("PlayedCards " + Arrays.toString(roundCards));
 		System.out.println("Your hand " + toString());
 
-		int cardNum = UI.readInt();
+		int cardNum = UI.readInt() - 1;
 		int i = 0;
 		int j = 0;
 		while(cardNum > 0){
@@ -50,9 +50,10 @@ class Hand {
 				cardNum--;
 			}else{
 				i++;
+				j=0;
 			}
-
 		}
+		System.out.println("i " + i + " j " + j);
 		Card c = mCardsBySuit[i].get(j);
 		Remove(c);
 		return c;
