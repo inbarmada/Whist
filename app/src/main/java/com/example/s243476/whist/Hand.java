@@ -10,8 +10,7 @@ class Hand {
   public Hand(){
 		int i;
 		mCardsBySuit = new ArrayList[4];
-		for(i=0; i<4; i++)
-		{
+		for(i=0; i<4; i++){
 			mCardsBySuit[i] = new ArrayList<Card>();
 		}
   }
@@ -77,35 +76,40 @@ class Hand {
 	//Choose a card if automatic
 	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-		//Check if have the suit in use
 		Card c = null;
+
+		Card highest = c.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump, suit);
+		//Check if you have the leading suit
 		if(!cards.isEmpty()){
-			c = cards.get(cards.size() - 1);
-
-			//if(c.Rank() > Card.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3]))
+			/*System.out.println("hello");
+			System.out.println(highest + " : " + highest.Rank() + " .. " + cards.get(0).Rank() + "first - " + (highest.Suit() != trump) + " sec - " + (highest.Rank() > cards.get(0).Rank()));
+*/
+			if(highest.Suit() != trump && highest.Rank() < cards.get(0).Rank()){
+				c = cards.get(0);
+				System.out.println("1");
+			}else{
+				c = cards.get(cards.size() - 1);
+				System.out.println("2");
+			}
 		}
-
 		else if(trump.ordinal() != 4){
 				//Check if you have trumps
 				if(!mCardsBySuit[trump.ordinal()].isEmpty()){
 
 					//Check if a trump has been placed, and if so check what the max is
 					int maxTrump = 0;
-					for(Card i : roundCards){
-						if(i == null)
-							break;
-						if(i.Suit().ordinal() == trump.ordinal()){
-						System.out.println(i);
-							if(i.Rank() > maxTrump){
-								maxTrump = i.Rank();
+					if(highest.Suit() == trump){
+						for(Card i : mCardsBySuit[trump.ordinal()]){
+							if(i.Rank() > highest.Rank()){
+								c = i;
+								break;
 							}
-						}
-					}
-					for(Card i : mCardsBySuit[trump.ordinal()]){
-						if(i.Rank() > maxTrump){
-							c = i;
-							break;
-						}
+						}				System.out.println("3");
+
+					}else{
+						c = mCardsBySuit[trump.ordinal()].get(mCardsBySuit[trump.ordinal()].size() - 1);
+						System.out.println("4");
+
 					}
 				}else{
 					int min = 13;
@@ -114,14 +118,17 @@ class Hand {
 							break;
 						if(i.get(0).Suit().ordinal() == trump.ordinal())
 							break;
-						if(i.get(0).Rank() < min)
-							c = i.get(0);
+						if(i.get(i.size() - 1).Rank() < min)
+							c = i.get(i.size() - 1);
+						System.out.println("5");
 
 					}
 				}
 
 
 			}if(c == null){
+				System.out.println("6");
+
 				for(int i = 0; i < 4; i++){
 					if(mCardsBySuit[i].size() != 0){
 						c = mCardsBySuit[i].get(mCardsBySuit[i].size() - 1);
@@ -216,24 +223,6 @@ class Hand {
 		}
 		return eval;
 	}
-
-  //Choose a card if automatic
-	/*
-  public Card Choose(CardSuit suit){
-		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
-    UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm in choose(suit)");
-
-    for(int i = cards.size() - 1; i >= 0; i--){
-        UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still there in choose(suit)" + i + cards.get(i));
-
-        if(cards.get(i).Suit() == suit){
-            return cards.remove(i);
-        }
-        UI.Log(com.example.s243476.whist.Severity.DEBUG, "choose(suit)", "Heyo I'm still in choose(suit)");
-
-    }
-    return cards.remove(0);
-	}*/
 
   //return a list of all cards to show the (non-automatic) player
   public ArrayList<Card> showCards(){

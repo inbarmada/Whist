@@ -128,7 +128,7 @@ public class Game{
 					UI.Log(Severity.INFO, "Game::Playing", "trump " + trump + trump.ordinal());
 
 					int j = mCurWinner;
-					Card start = null;
+					CardSuit start = null;
 					UI.Log(Severity.INFO, "Game::Playing", "hi");
 					do{
 
@@ -137,36 +137,32 @@ public class Game{
 							Card c = mPlayers[0].mCurHand.realChoose(roundCards);
 							UI.Log(Severity.INFO, "Game", "You chose " + c);
 							roundCards[0] = c;
-							if(j == mCurWinner)
-								start = c;
 						}
 						else{
 							if(start == null){
 								roundCards[j%4] = mPlayers[j%4].Choose();
 
-								start = roundCards[j%4];
 							}
 							else{
-								roundCards[j%4] = mPlayers[j%4].Choose(roundCards, start.Suit(), trump);
+								roundCards[j%4] = mPlayers[j%4].Choose(roundCards, start, trump);
 
 							}
-
-
 						}
+						if(j == mCurWinner)
+							start = roundCards[j%4].Suit();
 							//roundCards has been filled
 							UI.Log(Severity.INFO, "Game::Playing", "hand:" + mPlayers[j%4].mCurHand + " - " + roundCards[j%4]);
 
 							j++;
 					}while(j%4 != (mCurWinner));
-					UI.Log(Severity.INFO, "Game::Playing", "-Chosen cards are:" + Arrays.toString(roundCards));
 
 					//Choose winner and update scores
-					getRoundCards(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump);
+					getRoundCards(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump, start);
 					UI.Log(Severity.INFO, "Game::Playing", "Chosen cards are:" + Arrays.toString(roundCards));
 
 					//Print scores
 					for(Player player : mPlayers){
-						System.out.println(player + "Total score is: " + player.TotalScore());
+						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.TotalScore());
 					}
 				}
 				winner();
@@ -174,10 +170,10 @@ public class Game{
 
 	}
 
-  public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
+  public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump, CardSuit start){
 		UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
 
-		Card winner = Card.Compare(one, two, three, four, trump);
+		Card winner = Card.Compare(one, two, three, four, trump, start);
 		if(winner.equals(one)){
 			mPlayers[0].UpdateScore(1);
 			mCurWinner = 0;

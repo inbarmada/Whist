@@ -23,25 +23,35 @@ public class Card implements Comparable<Card>
 
 
 	// The following comarison used for evaluating a Whist Winner
-  static Card Compare(Card one, Card two, CardSuit trump){
+  static Card Compare(Card one, Card two, CardSuit trump, CardSuit start){
+      //Check if anything is null
+      if(one == null)
+        return two;
+      if(two == null)
+        return one;
+      //Now compare
       Card winner = one;
       if(one.mSuit == two.mSuit){
           if(one.mRank.indexOf() < two.mRank.indexOf())
               winner = two;
       }
       else{
-          if(two.mSuit == trump){
+          if(two.mSuit == trump || (one.mSuit != start && one.mSuit != trump)){
               winner = two;
-		      }
+		      }else if(two.mSuit != start)
+            if(one.mSuit != start)
+              winner = null;
+            else
+              winner = one;
       }
       UI.Log(Severity.DEBUG, "Card::Compare", "Comparing " + one + " to " + two + ", and the winner is..." + winner);
 	    return winner;
   }
 
-  public static Card Compare(Card one, Card two, Card three, Card four, CardSuit trump){
-      Card winner1 = Compare(one, two, trump);
-      Card winner2 = Compare(three, four, trump);
-      Card winner =  Compare(winner1, winner2, trump);
+  public static Card Compare(Card one, Card two, Card three, Card four, CardSuit trump, CardSuit start){
+      Card winner1 = Compare(one, two, trump, start);
+      Card winner2 = Compare(three, four, trump, start);
+      Card winner =  Compare(winner1, winner2, trump, start);
 		return winner;
   }
 
