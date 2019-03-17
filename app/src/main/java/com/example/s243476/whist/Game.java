@@ -78,7 +78,7 @@ public class Game{
 			{
 				Player player = mPlayers[i%4];
 				newContract = player.Bid(curContract);
-				UI.Log(INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
+				UI.Log(Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
 				if(newContract.equals(curContract))
 				{
 					UI.Log(Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
@@ -96,7 +96,7 @@ public class Game{
 		} while(passCount < 4);
 		if(winner >= 0)
 		{
-			Log(Severity.INFO, "Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
+			UI.Log(Severity.INFO, "Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
 			mCurWinner = winner;
 			mCurContract = curContract;
 		}
@@ -125,11 +125,11 @@ public class Game{
 					//Each person chooses a card and adds it to roundCards
 	        Card[] roundCards = new Card[4];
 					CardSuit trump = mCurContract.Trump();
-					UI.Log(Severity.INFO, "Game::Playing", "trump " + trump + trump.ordinal());
+					//UI.Log(Severity.INFO, "Game::Playing", "trump " + trump + trump.ordinal());
 
 					int j = mCurWinner;
 					CardSuit start = null;
-					UI.Log(Severity.INFO, "Game::Playing", "hi");
+					//UI.Log(Severity.INFO, "Game::Playing", "hi");
 					do{
 
 						if(j%4 == 0){
@@ -151,7 +151,7 @@ public class Game{
 						if(j == mCurWinner)
 							start = roundCards[j%4].Suit();
 							//roundCards has been filled
-							UI.Log(Severity.INFO, "Game::Playing", "hand:" + mPlayers[j%4].mCurHand + " - " + roundCards[j%4]);
+							//UI.Log(Severity.INFO, "Game::Playing", "hand:" + mPlayers[j%4].mCurHand + " - " + roundCards[j%4]);
 
 							j++;
 					}while(j%4 != (mCurWinner));
@@ -162,7 +162,7 @@ public class Game{
 
 					//Print scores
 					for(Player player : mPlayers){
-						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.TotalScore());
+						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.RoundScore());
 					}
 				}
 				winner();
@@ -193,8 +193,8 @@ public class Game{
 		int index = -1;
 		int maxPoints = 0;
 		for(int i = 0; i < 4; i++){
-			if(mPlayers[i].TotalScore() > maxPoints){
-				maxPoints = mPlayers[i].TotalScore();
+			if(mPlayers[i].RoundScore() > maxPoints){
+				maxPoints = mPlayers[i].RoundScore();
 				index = i;
 			}
 		}

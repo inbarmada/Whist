@@ -86,10 +86,8 @@ class Hand {
 */
 			if(highest.Suit() != trump && highest.Rank() < cards.get(0).Rank()){
 				c = cards.get(0);
-				System.out.println("1");
 			}else{
 				c = cards.get(cards.size() - 1);
-				System.out.println("2");
 			}
 		}
 		else if(trump.ordinal() != 4){
@@ -104,12 +102,10 @@ class Hand {
 								c = i;
 								break;
 							}
-						}				System.out.println("3");
+						}
 
 					}else{
 						c = mCardsBySuit[trump.ordinal()].get(mCardsBySuit[trump.ordinal()].size() - 1);
-						System.out.println("4");
-
 					}
 				}else{
 					int min = 13;
@@ -120,15 +116,11 @@ class Hand {
 							break;
 						if(i.get(i.size() - 1).Rank() < min)
 							c = i.get(i.size() - 1);
-						System.out.println("5");
-
 					}
 				}
 
 
 			}if(c == null){
-				System.out.println("6");
-
 				for(int i = 0; i < 4; i++){
 					if(mCardsBySuit[i].size() != 0){
 						c = mCardsBySuit[i].get(mCardsBySuit[i].size() - 1);

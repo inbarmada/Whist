@@ -30,7 +30,7 @@ public class UI {
 			//end of instructions
 			System.out.println("*************************************");*/
 			//beginning of game
-			System.out.println("*************************************");
+			/*System.out.println("*************************************");
 			System.out.println("\t\t\tPlayer 3");
 			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
 			System.out.println("\n\n");
@@ -44,12 +44,12 @@ public class UI {
 		}
 			else
 			{
-				System.out.print("\t\t" + Suit.);
+				System.out.print("\t\t");
 			}
 			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
 
 			//end of game
-			System.out.println("*************************************");
+			System.out.println("*************************************");*/
 		}
 
 		static int readInt(){
