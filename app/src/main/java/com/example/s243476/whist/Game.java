@@ -37,7 +37,7 @@ public class Game{
 
 	private void Play1Round(){
 		int i;
-		com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Starting...");
+		UI.Log(Severity.INFO, "Game::PlayRound", "Starting...");
     Deck deck = new Deck();
 	  Hand[] Hands = new Hand[4];
 
@@ -50,15 +50,15 @@ public class Game{
 				Debug();
 
 				//Bid
-        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
         Bidding();
 
 				//Set contract
-        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
         ContractsSetting();
 
 				//Play rounds!
-        UI.Log(com.example.s243476.whist.Severity.INFO, "Game::PlayRound", "Let's start playing!..");
+        UI.Log(Severity.INFO, "Game::PlayRound", "Let's start playing!..");
 				playing();
 
     }
@@ -78,10 +78,10 @@ public class Game{
 			{
 				Player player = mPlayers[i%4];
 				newContract = player.Bid(curContract);
-				com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
+				UI.Log(Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
 				if(newContract.equals(curContract))
 				{
-					com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
+					UI.Log(Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
 					passTable[i%4] = 1;
 					passCount ++;
 				}
@@ -89,20 +89,20 @@ public class Game{
 				{
 					curContract = newContract;
 					winner = i%4;
-					com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Bid: " + curContract);
+					UI.Log(Severity.INFO, "Game:Bidding", "Player " + player + " Bid: " + curContract);
 				}
 			}
 			i++;
 		} while(passCount < 4);
 		if(winner >= 0)
 		{
-			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
+			Log(Severity.INFO, "Game:Bidding", "Winner: " + mPlayers[winner] + ", Contract: " + curContract);
 			mCurWinner = winner;
 			mCurContract = curContract;
 		}
 		else
 		{
-			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "No Winner");
+			UI.Log(Severity.INFO, "Game:Bidding", "No Winner");
 		}
 	}
 
@@ -113,7 +113,7 @@ public class Game{
 		{
 			Contract contract = mPlayers[(mCurWinner+i)%4].SetContract(trump, count);
 			count += contract.Level();
-			com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game::SetContract", mPlayers[(mCurWinner+i)%4].toString() + " contract: " + contract + " (Total=" + count + ")");
+			UI.Log(Severity.INFO, "Game::SetContract", mPlayers[(mCurWinner+i)%4].toString() + " contract: " + contract + " (Total=" + count + ")");
 		}
 	}
 
@@ -175,7 +175,7 @@ public class Game{
 	}
 
   public void getRoundCards(Card one, Card two, Card three, Card four, CardSuit trump){
-		UI.Log(com.example.s243476.whist.Severity.INFO, "Game::getRoundCards", "In getRoundCards");
+		UI.Log(Severity.INFO, "Game::getRoundCards", "In getRoundCards");
 
 		Card winner = Card.Compare(one, two, three, four, trump);
 		if(winner.equals(one)){

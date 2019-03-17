@@ -21,10 +21,34 @@ public class UI {
 
 		static void show()
 		{
-			//beginning
+			/*//beginning of instructions
 			System.out.println("*************************************");
+			Scanner read = new Scanner(System.in);
+			System.out.println("Please enter your name:");
+			String name = read.???
+			System.out.println("Welcom " + name + ","); //actual instractions
+			//end of instructions
+			System.out.println("*************************************");*/
+			//beginning of game
+			System.out.println("*************************************");
+			System.out.println("\t\t\tPlayer 3");
+			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
+			System.out.println("\n\n");
+			System.out.print("Player 2");
+			System.out.print("\t\tTrump Suit");
+			System.out.println("\t\t\tPlayer 3");
+			System.out.print("[" + p2.UpdateScore + " / " + p2.Evaluate + "]");
+			if(trump == NT)
+			{
+			System.out.print("\t\t-");
+		}
+			else
+			{
+				System.out.print("\t\t" + Suit.);
+			}
+			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
 
-			//end
+			//end of game
 			System.out.println("*************************************");
 		}
 

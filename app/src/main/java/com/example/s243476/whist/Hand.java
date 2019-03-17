@@ -162,7 +162,7 @@ class Hand {
 				}
 			}
 		}
-		UI.Log(com.example.s243476.whist.Severity.DEBUG,"Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
+		UI.Log(Severity.DEBUG,"Hand::EvaluteSuit", cards.toString() + " -> " +  eval);
 		return eval;
 	}
 
@@ -208,7 +208,7 @@ class Hand {
 
 	public int SetContract(CardSuit trump, int count){
 		int eval = 0;
-		UI.Log(com.example.s243476.whist.Severity.DEBUG, "Hand::SetContract", "start...");
+		UI.Log(Severity.DEBUG, "Hand::SetContract", "start...");
 
 		for(int suit=0; suit<4; suit++)
 		{
