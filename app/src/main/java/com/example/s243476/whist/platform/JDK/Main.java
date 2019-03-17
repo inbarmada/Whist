@@ -8,7 +8,7 @@ public class Main {
 		Game mGame;
 		UI.Log(Severity.DEBUG, "MainSDK::main", "Starting...");
 
- 		Player p1 = new AutoPlayer("Johnson");
+ 		Player p1 = new RealPlayer("Johnson");
 		Player p2 = new AutoPlayer();
 		Player p3 = new AutoPlayer();
 		Player p4 = new AutoPlayer();

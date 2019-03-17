@@ -78,10 +78,10 @@ public class Game{
 			{
 				Player player = mPlayers[i%4];
 				newContract = player.Bid(curContract);
-				com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
+				UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "cur: " + curContract + ", New: " + newContract);
 				if(newContract.equals(curContract))
 				{
-					com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
+					UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Passed (" + passCount + ")");
 					passTable[i%4] = 1;
 					passCount ++;
 				}
@@ -89,7 +89,7 @@ public class Game{
 				{
 					curContract = newContract;
 					winner = i%4;
-					com.example.s243476.whist.UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Bid: " + curContract);
+					UI.Log(com.example.s243476.whist.Severity.INFO, "Game:Bidding", "Player " + player + " Bid: " + curContract);
 				}
 			}
 			i++;
