@@ -23,6 +23,12 @@ public class Game{
 	    for(int i=0; i < numOfRounds; i++)
 		{
 			Play1Round();
+			for(int j = 0; j < 4; j++){
+				mPlayers[j].UpdateGameScore();
+			}
+		}
+		for(int i = 0; i < 4; i++){
+			UI.Log(Severity.INFO, "Game::Final Scores", mPlayers[i] + " GameScore is " + mPlayers[i].mGameScore);
 		}
 	}
 

@@ -67,6 +67,7 @@ public abstract class Player
 				mGameScore -= difference*10;
 			}
 		}
+		mRoundScore = 0;
 
 		return mGameScore;
 	}
