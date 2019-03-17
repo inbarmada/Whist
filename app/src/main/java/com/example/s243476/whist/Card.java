@@ -36,13 +36,18 @@ public class Card implements Comparable<Card>
               winner = two;
       }
       else{
-          if(two.mSuit == trump || (one.mSuit != start && one.mSuit != trump)){
+          if(one.mSuit == trump){
+            winner = one;
+          }else if(two.mSuit == trump){
               winner = two;
-		      }else if(two.mSuit != start)
+		      }else if(two.mSuit != start){
             if(one.mSuit != start)
               winner = null;
             else
               winner = one;
+          }else{
+            winner = two;
+          }
       }
       UI.Log(Severity.DEBUG, "Card::Compare", "Comparing " + one + " to " + two + ", and the winner is..." + winner);
 	    return winner;
