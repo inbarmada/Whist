@@ -10,6 +10,17 @@ public class AutoPlayer extends Player
   		return mCurContract;
     }
 
+    public Contract SetContract(CardSuit trump, int count){
+			if(count != 0)
+			{
+				int level = mCurHand.SetContract(trump, count);
+				mCurContract = new Contract(trump, level);
+			}
+
+			UI.Log(Severity.DEBUG, "Player::SetContract", this.toString() + ", " + mCurContract);
+			return mCurContract;
+    }
+
   	public AutoPlayer(){
   		super();
       }

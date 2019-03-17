@@ -7,7 +7,7 @@ PACKAGE = com/example/s243476/whist
 SRC_DIR = $(PACKAGE)
 PLATFORM_DIR = $(SRC_DIR)/platform/JDK
 
-WHIST_CLASSES =  Hand Deck Player AutoPlayer Game CardSuit CardRank Card Contract
+WHIST_CLASSES =  Hand Deck Player AutoPlayer RealPlayer Game CardSuit CardRank Card Contract
 PLATFORM_CLASSES =  UI Main
  
 TARGETS =  $(addsuffix .class,$(PLATFORM_CLASSES)) $(addsuffix .class,$(WHIST_CLASSES)) 
