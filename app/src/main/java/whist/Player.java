@@ -82,7 +82,9 @@ public abstract class Player
     }
 
     public String toString(){
-			return mName + "(" + mRoundScore + ")";
+			if(mCurContract == null)
+				 return mRoundScore + "";
+			return mRoundScore + "(" + mCurContract.Level() + ")";
     }
 
 }

@@ -5,8 +5,9 @@ enum Severity {
 	DEBUG, INFO, WARNING, ERROR, FATAL
 }
 
-public class UI {
-
+public class UI
+{
+	static String name = "";
     /*static void createCardButton(final Player one, final Card i){
 		Log(Severity.DEBUG, "MainSDK::createCardButton", "...");
 	}*/
@@ -18,38 +19,54 @@ public class UI {
 				System.out.println(str1 + " " + str2);
 			}
 		}
-
-		static void show()
-		{
-			/*//beginning of instructions
-			System.out.println("*************************************");
-			Scanner read = new Scanner(System.in);
-			System.out.println("Please enter your name:");
-			String name = read.???
-			System.out.println("Welcom " + name + ","); //actual instractions
-			//end of instructions
-			System.out.println("*************************************");*/
-			//beginning of game
-			/*System.out.println("*************************************");
-			System.out.println("\t\t\tPlayer 3");
-			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
-			System.out.println("\n\n");
-			System.out.print("Player 2");
-			System.out.print("\t\tTrump Suit");
-			System.out.println("\t\t\tPlayer 3");
-			System.out.print("[" + p2.UpdateScore + " / " + p2.Evaluate + "]");
-			if(trump == NT)
-			{
-			System.out.print("\t\t-");
+		static String readStng(){
+			System.out.println("What's your name?");
+			Scanner kb = new Scanner(System.in);
+			name = kb.nextLine();
+			return name;
 		}
-			else
-			{
-				System.out.print("\t\t");
-			}
-			System.out.println("\t\t\t[" + p3.UpdateScore + " / " + p3.Evaluate + "]");
 
-			//end of game
-			System.out.println("*************************************");*/
+		static void show(Player[] mPlayers)
+		{
+			{
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println("***************************************************************************************************************************");
+				System.out.println("                                                            Player 3");
+				System.out.println("                                                              " + mPlayers[2]);
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println("Player 2                                                   Trump Suit                                             Player 4");
+				System.out.print("  " + mPlayers[1]+ "                                                                                                              " + mPlayers[3]);
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println("                                                                 " + name);
+				System.out.println("                                                                 " + mPlayers[0]);
+				System.out.println(mPlayers[0].mCurHand);
+				//end of game
+				System.out.println("***************************************************************************************************************************");
+			}
 		}
 
 		static int readInt(){

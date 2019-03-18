@@ -53,21 +53,36 @@ public class Game{
 		}
         //Deal the cards
         deck.Deal(Hands);
-				Debug();
+				//Debug();
 
 				//Bid
         UI.Log(Severity.INFO, "Game::PlayRound", "Time to bid (for the Trump Suit)...");
         Bidding();
 
+
 				//Set contract
         UI.Log(Severity.INFO, "Game::PlayRound", "Time to set the Contracts...");
         ContractsSetting();
+
+				//UI.show(mPlayers);
+
 
 				//Play rounds!
         UI.Log(Severity.INFO, "Game::PlayRound", "Let's start playing!..");
 				playing();
 
     }
+		/*public int[][] getPlayerInfo()
+		{
+			int[][] playerInfo = new int[4][2];
+			String[] suits = new int["CL", "DI", "HE", "SP", "NT"]
+			int num = 0;
+			for(Player pl : mPlayer)
+			{
+				playerInfo[num][0] = player.curContract.
+			}
+			return playerInfo;
+		}*/
 
 	private void Bidding(){
 		int i = mNextToBet % 4;
@@ -128,6 +143,8 @@ public class Game{
 				mCurWinner = 0;
 				//Play 13 rounds
 				for(int i = 0; i < 13; i++){
+					UI.show(mPlayers);
+
 					//Each person chooses a card and adds it to roundCards
 	        Card[] roundCards = new Card[4];
 					CardSuit trump = mCurContract.Trump();
