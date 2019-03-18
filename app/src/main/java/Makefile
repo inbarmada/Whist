@@ -3,7 +3,7 @@ RM=rm
 
 COMPILE_OPT =  "-Xlint:unchecked"
 
-PACKAGE = com/example/s243476/whist
+PACKAGE = whist
 SRC_DIR = $(PACKAGE)
 PLATFORM_DIR = $(SRC_DIR)/platform/JDK
 

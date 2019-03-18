@@ -1,4 +1,4 @@
-package com.example.s243476.whist;
+package whist;
 
 public class Contract
 {

@@ -1,4 +1,4 @@
-package com.example.s243476.whist;
+package whist;
 
 
 public class Main {
@@ -18,8 +18,9 @@ public class Main {
         mGame = new Game(p1, p2, p3, p4);
         UI.Log(Severity.DEBUG, "MainSDK::main", "Have Created Game");
 
+        UI.Log(Severity.INFO, "Ready to Start", "How many rounds would you like to play?");
 
-        mGame.Play(1);
+        mGame.Play(UI.readInt());
         UI.Log(Severity.DEBUG, "MainSDK::main", "Have game.play-ed");
 
     }

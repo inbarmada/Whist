@@ -1,4 +1,4 @@
-package com.example.s243476.whist;
+package whist;
 import java.util.*;
 
 public class Game{

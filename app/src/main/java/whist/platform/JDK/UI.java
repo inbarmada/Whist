@@ -1,4 +1,4 @@
-package com.example.s243476.whist;
+package whist;
 import java.util.Scanner;
 
 enum Severity {
@@ -7,9 +7,9 @@ enum Severity {
 
 public class UI {
 
-    static void createCardButton(final Player one, final Card i){
+    /*static void createCardButton(final Player one, final Card i){
 		Log(Severity.DEBUG, "MainSDK::createCardButton", "...");
-    }
+	}*/
 
     static void Log(Severity sev, String str1, String str2)
     {
