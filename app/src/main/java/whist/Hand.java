@@ -38,7 +38,7 @@ class Hand {
 
 	public Card realChoose(Card[] roundCards){
 		System.out.println("PlayedCards " + Arrays.toString(roundCards));
-		System.out.println("Your hand " + toString());
+		//System.out.println("Your hand " + toString());
 
 		int cardNum = UI.readInt();
 

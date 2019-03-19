@@ -185,7 +185,7 @@ public class Game{
 
 					//Print scores
 					for(Player player : mPlayers){
-						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.RoundScore());
+						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.NumTakes());
 					}
 				}
 				winner();
@@ -216,8 +216,8 @@ public class Game{
 		int index = -1;
 		int maxPoints = 0;
 		for(int i = 0; i < 4; i++){
-			if(mPlayers[i].RoundScore() > maxPoints){
-				maxPoints = mPlayers[i].RoundScore();
+			if(mPlayers[i].NumTakes() > maxPoints){
+				maxPoints = mPlayers[i].NumTakes();
 				index = i;
 			}
 		}
