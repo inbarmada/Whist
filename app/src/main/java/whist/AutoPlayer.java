@@ -14,7 +14,10 @@ public class AutoPlayer extends Player
 			if(count != 0)
 			{
 				int level = mCurHand.SetContract(trump, count);
-				mCurContract = new Contract(trump, level);
+        if(count + level != 13)
+				  mCurContract = new Contract(trump, level);
+        else
+          mCurContract = new Contract(trump, level + 1);//Might want to adjust so it doesn't just add, but think if should add or subtract
 			}
 
 			UI.Log(Severity.DEBUG, "Player::SetContract", this.toString() + ", " + mCurContract);

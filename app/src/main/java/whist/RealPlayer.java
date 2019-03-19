@@ -27,6 +27,10 @@ public class RealPlayer extends Player
         UI.Log(Severity.INFO, "Player::Bid", this + ": hand:: " + mCurHand);
         UI.Log(Severity.INFO, "Player::Bid", this + ": Choose takes:: ");
         int takes = UI.readInt();
+        while(count + takes == 13){
+          UI.Log(Severity.INFO, "Player::Bid", this + "Invalid number - total cannot add up to 13. Please choose again:: ");
+          takes = UI.readInt();
+        }
 				mCurContract = new Contract(trump, takes);
 			}
 
