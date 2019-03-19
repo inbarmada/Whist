@@ -36,7 +36,7 @@ class Hand {
 		}
 	}
 
-	public Card CardsPrint(Card[] roundCards)
+	public Card[] CardsPrint(Card[] roundCards)
 	{
 		return roundCards;
 	}
@@ -53,13 +53,11 @@ class Hand {
 
 			int cardNum = UI.readInt();
 
-
 			int cntr = 1;
 	    for(int curSuit = 0; curSuit < 4; curSuit++){
 				for(int i = 0; i < mCardsBySuit[curSuit].size(); i++){
 					if(cntr == cardNum){
 						cntr ++;
-
 						c = mCardsBySuit[curSuit].get(i);
 						break;
 					}

@@ -24,6 +24,15 @@ public class AutoPlayer extends Player
 			return mCurContract;
     }
 
+    public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
+      if(roundCards[0] == null && roundCards[1] == null && roundCards[2] == null && roundCards[3] == null)
+        return mCurHand.Choose(/*trump*/);
+      if(mCurContract.Level() > mNumTakes)
+  			return mCurHand.winChoose(roundCards, suit, trump);
+  		else
+  			return mCurHand.loseChoose(roundCards, suit, trump);
+  	}
+
   	public AutoPlayer(){
   		super();
       }

@@ -38,6 +38,9 @@ public class RealPlayer extends Player
 			return mCurContract;
     }
 
+    public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
+  		return mCurHand.realChoose(roundCards, suit);
+  	}
 
   	public RealPlayer(){
   		super();

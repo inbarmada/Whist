@@ -32,16 +32,7 @@ public abstract class Player
     mCurHand = h;
   }
 
-  public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
-		if(mCurContract.Level() > mNumTakes)
-			return mCurHand.winChoose(roundCards, suit, trump);
-		else
-			return mCurHand.loseChoose(roundCards, suit, trump);
-	}
-
-	public Card Choose(){
-		return mCurHand.Choose(/*trump*/);
-	}
+	public abstract Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump);
 
 	public String Name(){
 		return mName;
@@ -79,16 +70,16 @@ public abstract class Player
 		return mGameScore;
 	}
 
-    public abstract Contract Bid(Contract curContract);
+  public abstract Contract Bid(Contract curContract);
 
-    public abstract Contract SetContract(CardSuit trump, int count);
+  public abstract Contract SetContract(CardSuit trump, int count);
 
-    public int DebugInfo(){
+  public int DebugInfo(){
 			UI.Log(Severity.DEBUG, ".....Player::DebugInfo", this + ": " + mCurHand);
 			return 0;
-    }
+  }
 
-    public String toString(){
+  public String toString(){
 			if(mCurContract == null)
 				 return mNumTakes + "";
 			return mNumTakes + "(" + mCurContract.Level() + ")";

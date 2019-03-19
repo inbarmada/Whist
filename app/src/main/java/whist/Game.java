@@ -163,7 +163,7 @@ public class Game{
 						}
 						else{
 							if(start == null){
-								roundCards[j%4] = mPlayers[j%4].Choose();
+								roundCards[j%4] = mPlayers[j%4].Choose(roundCards, start, trump);
 
 							}
 							else{
