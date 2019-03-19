@@ -74,7 +74,7 @@ class Hand {
 	}
 
 	//Choose a card if automatic
-	public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
+	public Card winChoose(Card[] roundCards, CardSuit suit, CardSuit trump){
 		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
 		Card c = null;
 
@@ -82,8 +82,7 @@ class Hand {
 		//Check if you have the leading suit
 		if(!cards.isEmpty()){
 			/*System.out.println("hello");
-			System.out.println(highest + " : " + highest.Rank() + " .. " + cards.get(0).Rank() + "first - " + (highest.Suit() != trump) + " sec - " + (highest.Rank() > cards.get(0).Rank()));
-*/
+			System.out.println(highest + " : " + highest.Rank() + " .. " + cards.get(0).Rank() + "first - " + (highest.Suit() != trump) + " sec - " + (highest.Rank() > cards.get(0).Rank()));*/
 			if(highest.Suit() != trump && highest.Rank() < cards.get(0).Rank()){
 				c = cards.get(0);
 			}else{
@@ -131,6 +130,39 @@ class Hand {
 		Remove(c);
     return c;
   }
+
+	public Card loseChoose(Card[] roundCards, CardSuit suit, CardSuit trump){
+		ArrayList<Card>  cards = mCardsBySuit[suit.ordinal()];
+		Card c = null;
+
+		Card highest = c.Compare(roundCards[0], roundCards[1], roundCards[2], roundCards[3], trump, suit);
+		//Check if you have the leading suit
+		if(!cards.isEmpty()){
+			for(Card i : cards)
+				if(i.Rank() < highest.Rank()){
+					c = i;
+					break;
+				}
+		}
+		else{
+			int highestRank = 0;
+			for(int i = 0; i < 4; i++){
+				if(mCardsBySuit[i].size() != 0 && i != trump.ordinal() && mCardsBySuit[i].get(0).Rank() > highestRank){
+					c = mCardsBySuit[i].get(0);
+					highestRank = c.Rank();
+				}
+			}
+		}if(c == null){
+				for(int i = 0; i < 4; i++){
+					if(mCardsBySuit[i].size() != 0){
+						c = mCardsBySuit[i].get(0);
+					}
+				}
+			}
+
+		Remove(c);
+    return c;
+	}
 
 	public int EvaluteSuit(ArrayList<Card> cards, CardSuit trump){
 		int size = cards.size();

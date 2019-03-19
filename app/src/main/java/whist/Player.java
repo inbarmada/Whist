@@ -33,7 +33,10 @@ public abstract class Player
   }
 
   public Card Choose(Card[] roundCards, CardSuit suit, CardSuit trump){
-		return mCurHand.Choose(roundCards, suit, trump);
+		if(mCurContract.Level() > mRoundScore)
+			return mCurHand.winChoose(roundCards, suit, trump);
+		else
+			return mCurHand.loseChoose(roundCards, suit, trump);
 	}
 
 	public Card Choose(){
