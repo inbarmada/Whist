@@ -7,7 +7,6 @@ enum Severity {
 
 public class UI
 {
-	static String name = "";
     /*static void createCardButton(final Player one, final Card i){
 		Log(Severity.DEBUG, "MainSDK::createCardButton", "...");
 	}*/
@@ -21,6 +20,7 @@ public class UI
 		}
 		static String getPlayerName()
 		{
+			String name;
 			System.out.println("What's your name?");
 			Scanner kb = new Scanner(System.in);
 			name = kb.nextLine();
@@ -75,7 +75,7 @@ public class UI
 				System.out.flush();
 				
 				System.out.println("***************************************************************************************************************************");
-				System.out.println("                                                            Player 3");
+				System.out.println("                                                            "+mPlayers[2].Name());
 				System.out.println("                                                               " + mPlayers[2].GameScore());
 				System.out.println("                                                              " + mPlayers[2]);
 				System.out.println();
@@ -86,7 +86,7 @@ public class UI
 				System.out.println();
 				System.out.println();
 				System.out.println();
-				System.out.println("Player 2                                                   Trump Suit                                             Player 4");
+				System.out.println(" "+ mPlayers[1].Name() + "                                                      Trump Suit                                             " + mPlayers[3].Name());
 				System.out.println("   " + mPlayers[1].GameScore()+ "                                                                                                                 " + mPlayers[3].GameScore());
 				System.out.print("  " + mPlayers[1]+ "                                                         " + mPlayers[0].mCurContract.Trump()+ "                                                   " + mPlayers[3]);
 				System.out.println();
@@ -96,7 +96,7 @@ public class UI
 				System.out.println();
 				System.out.println();
 				System.out.println();
-				System.out.println("                                                               " + name);
+				System.out.println("                                                               " + mPlayers[0].Name());
 				System.out.println("                                                                " + mPlayers[0].GameScore());
 				System.out.println("                                                               " + mPlayers[0]);
 				System.out.println(mPlayers[0].mCurHand);
