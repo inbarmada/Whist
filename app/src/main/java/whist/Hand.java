@@ -36,6 +36,11 @@ class Hand {
 		}
 	}
 
+	public Card CardsPrint(Card[] roundCards)
+	{
+		return roundCards;
+	}
+
 	public Card realChoose(Card[] roundCards, CardSuit suit){
 		System.out.println("PlayedCards " + Arrays.toString(roundCards));
 		Card c = null;
