@@ -16,31 +16,64 @@ public class UI
     {
 			if(sev.ordinal() >= Severity.INFO.ordinal())
 			{
-				System.out.println(str1 + " " + str2);
+				System.out.println("["+sev.toString()+"] " + str1 + " " + str2);
 			}
 		}
-		static String readStng(){
+		static String getPlayerName()
+		{
 			System.out.println("What's your name?");
 			Scanner kb = new Scanner(System.in);
 			name = kb.nextLine();
 			return name;
 		}
 
-		static void show(Player[] mPlayers)
+		static int getNumOfRounds()
+		{
+			int nRounds;
+	        System.out.println("How many rounds would you like to play?");
+	
+			do 
+			{
+				nRounds = UI.readInt();
+			} while(nRounds <= 0);
+			return nRounds;
+		}
+
+		static void showHand(Hand hand)
+		{
+			System.out.println(hand);
+		}
+
+	
+
+		static int getBid()
+		{
+			int bid;
+			System.out.println("Place your bet:");
+			do{
+				System.out.println("[0]Pass or Choose suit: [1]CL, [2]DI [3]HE [4]SP [5]NT");
+				bid = UI.readInt();		
+			} while (bid<0 || bid >6);
+			return bid;
+        }
+
+		static int getBidLevel()
+		{
+			int level;
+			do{
+				System.out.println("Choose number of takes");
+				level = UI.readInt();		
+			} while (level<4 || level >13);
+			return level;
+		}
+
+		static void showPlay(Player[] mPlayers)
 		{
 			{
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
+				// Clear the screen
+				System.out.print("\033[H\033[2J");  
+				System.out.flush();
+				
 				System.out.println("***************************************************************************************************************************");
 				System.out.println("                                                            Player 3");
 				System.out.println("                                                               " + mPlayers[2].GameScore());

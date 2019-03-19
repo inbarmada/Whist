@@ -5,20 +5,17 @@ import java.lang.String;
 public class RealPlayer extends Player
 {
     public Contract Bid(Contract curContract){
-      UI.Log(Severity.INFO, "Player::Bid", this + ": hand:: " + mCurHand);
-
-      UI.Log(Severity.INFO, "Player::Bid", this + "Do you want to place a bid (NO-0; YES-1)?");
-      int bid = UI.readInt();
+      UI.showHand(mCurHand);
+      int bid = UI.getBid();
       mCurContract = curContract;
-      if(bid == 1){
+      if(bid > 0){
     		UI.Log(Severity.INFO, "Player::Bid", this + ": Choose suit (CL-0; DI-1; He-2; SP-3; NT-4):: ");
-        int suit = UI.readInt();
+        int suit = bid - 1;
 
-        UI.Log(Severity.INFO, "Player::Bid", this + ": Choose takes:: ");
-        int takes = UI.readInt();
+        int takes = UI.getBidLevel();
         mCurContract = new Contract(CardSuit.values()[suit], takes);
       }
-  		return mCurContract;
+      return mCurContract;
     }
 
     public Contract SetContract(CardSuit trump, int count){

@@ -143,16 +143,15 @@ public class Game{
 				mCurWinner = 0;
 				//Play 13 rounds
 				for(int i = 0; i < 13; i++){
-					UI.show(mPlayers);
+					UI.showPlay(mPlayers);
 
 					//Each person chooses a card and adds it to roundCards
-	        Card[] roundCards = new Card[4];
+					Card[] roundCards = new Card[4];
 					CardSuit trump = mCurContract.Trump();
 					//UI.Log(Severity.INFO, "Game::Playing", "trump " + trump + trump.ordinal());
 
 					int j = mCurWinner;
 					CardSuit start = null;
-					//UI.Log(Severity.INFO, "Game::Playing", "hi");
 					do{
 
 						if(j%4 == 0){
