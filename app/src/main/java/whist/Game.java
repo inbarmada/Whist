@@ -157,7 +157,7 @@ public class Game{
 
 						if(j%4 == 0){
 							//Card c = mPlayers[0].Choose(trump);
-							Card c = mPlayers[0].mCurHand.realChoose(roundCards);
+							Card c = mPlayers[0].mCurHand.realChoose(roundCards, start);
 							UI.Log(Severity.INFO, "Game", "You chose " + c);
 							roundCards[0] = c;
 						}

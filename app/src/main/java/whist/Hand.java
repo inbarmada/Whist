@@ -36,27 +36,36 @@ class Hand {
 		}
 	}
 
-	public Card realChoose(Card[] roundCards){
+	public Card realChoose(Card[] roundCards, CardSuit suit){
 		System.out.println("PlayedCards " + Arrays.toString(roundCards));
-		//System.out.println("Your hand " + toString());
-
-		int cardNum = UI.readInt();
-
 		Card c = null;
 
-		int cntr = 1;
-    for(int suit = 0; suit < 4; suit++){
-			for(int i = 0; i < mCardsBySuit[suit].size(); i++){
-				if(cntr == cardNum){
+		//System.out.println("Your hand " + toString());
+		int tries = 0;
+		do{
+			if(tries >= 1)
+				UI.Log(Severity.INFO, "Hand::realChoose", "You have the starting suit so you must use it!! Pick again");
+
+			int cardNum = UI.readInt();
+
+
+			int cntr = 1;
+	    for(int curSuit = 0; curSuit < 4; curSuit++){
+				for(int i = 0; i < mCardsBySuit[curSuit].size(); i++){
+					if(cntr == cardNum){
+						cntr ++;
+
+						c = mCardsBySuit[curSuit].get(i);
+						break;
+					}
 					cntr ++;
 
-					c = mCardsBySuit[suit].get(i);
-					break;
 				}
-				cntr ++;
-
 			}
-		}
+			tries++;
+
+		}while(suit != null && c.Suit() != suit && !mCardsBySuit[suit.ordinal()].isEmpty());
+
 		Remove(c);
 		return c;
 	}
