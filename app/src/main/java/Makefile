@@ -1,4 +1,4 @@
-JAVAC="javac.exe"
+JAVAC=javac
 RM=rm
 
 COMPILE_OPT =  "-Xlint:unchecked"

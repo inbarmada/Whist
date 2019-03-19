@@ -51,6 +51,10 @@ public abstract class Player
 		return mRoundScore;
     }
 
+	public int GameScore(){
+		return mGameScore;
+	}
+
 	public int UpdateScore(int roundScore){
 		return mRoundScore += roundScore;
   }

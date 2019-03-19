@@ -43,6 +43,7 @@ public class UI
 				System.out.println();
 				System.out.println("***************************************************************************************************************************");
 				System.out.println("                                                            Player 3");
+				System.out.println("                                                               " + mPlayers[2].GameScore());
 				System.out.println("                                                              " + mPlayers[2]);
 				System.out.println();
 				System.out.println();
@@ -53,7 +54,8 @@ public class UI
 				System.out.println();
 				System.out.println();
 				System.out.println("Player 2                                                   Trump Suit                                             Player 4");
-				System.out.print("  " + mPlayers[1]+ "                                                                                                              " + mPlayers[3]);
+				System.out.println("   " + mPlayers[1].GameScore()+ "                                                                                                                 " + mPlayers[3].GameScore());
+				System.out.print("  " + mPlayers[1]+ "                                                         " + mPlayers[0].mCurContract.Trump()+ "                                                   " + mPlayers[3]);
 				System.out.println();
 				System.out.println();
 				System.out.println();
@@ -61,8 +63,9 @@ public class UI
 				System.out.println();
 				System.out.println();
 				System.out.println();
-				System.out.println("                                                                 " + name);
-				System.out.println("                                                                 " + mPlayers[0]);
+				System.out.println("                                                               " + name);
+				System.out.println("                                                                " + mPlayers[0].GameScore());
+				System.out.println("                                                               " + mPlayers[0]);
 				System.out.println(mPlayers[0].mCurHand);
 				//end of game
 				System.out.println("***************************************************************************************************************************");
