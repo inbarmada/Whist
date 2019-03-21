@@ -23,6 +23,24 @@ public class UI
 			return name;
 		}
 
+		String void instructions()
+		{
+			String answer;
+			System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("Hey " + getPlayerName() + ", do you want instructions? [0]Yes, [1]Pass");
+			Scanner kb = new Scanner(System.in);
+			answer = kb.nextInt();
+			if(answer == 1)
+			{
+				break;
+			}
+			else
+			{
+				System.out.println();
+			}
+			System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+		}
+
 		static int getNumOfRounds()
 		{
 			int nRounds;
@@ -100,6 +118,13 @@ public class UI
 				System.out.println("***************************************************************************************************************************");
 			}
 		}
+
+		/*public void winning()
+		{
+			System.out.println("***************************************************************************************************************************");
+			winner();
+			System.out.println("***************************************************************************************************************************");
+		}*/
 
 		static int readInt(){
 			Scanner kb = new Scanner(System.in);
