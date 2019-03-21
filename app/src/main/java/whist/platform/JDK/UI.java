@@ -27,12 +27,30 @@ public class UI
 			return name;
 		}
 
+		String void instructions()
+		{
+			String answer;
+			System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("Hey " + getPlayerName() + ", do you want instructions? [0]Yes, [1]Pass");
+			Scanner kb = new Scanner(System.in);
+			answer = kb.nextInt();
+			if(answer == 1)
+			{
+				break;
+			}
+			else
+			{
+				System.out.println();
+			}
+			System.out.println("---------------------------------------------------------------------------------------------------------------------------");
+		}
+
 		static int getNumOfRounds()
 		{
 			int nRounds;
 	        System.out.println("How many rounds would you like to play?");
-	
-			do 
+
+			do
 			{
 				nRounds = UI.readInt();
 			} while(nRounds <= 0);
@@ -44,7 +62,7 @@ public class UI
 			System.out.println(hand);
 		}
 
-	
+
 
 		static int getBid()
 		{
@@ -52,7 +70,7 @@ public class UI
 			System.out.println("Place your bet:");
 			do{
 				System.out.println("[0]Pass or Choose suit: [1]CL, [2]DI [3]HE [4]SP [5]NT");
-				bid = UI.readInt();		
+				bid = UI.readInt();
 			} while (bid<0 || bid >6);
 			return bid;
         }
@@ -62,7 +80,7 @@ public class UI
 			int level;
 			do{
 				System.out.println("Choose number of takes");
-				level = UI.readInt();		
+				level = UI.readInt();
 			} while (level<4 || level >13);
 			return level;
 		}
@@ -71,9 +89,9 @@ public class UI
 		{
 			{
 				// Clear the screen
-				System.out.print("\033[H\033[2J");  
+				System.out.print("\033[H\033[2J");
 				System.out.flush();
-				
+
 				System.out.println("***************************************************************************************************************************");
 				System.out.println("                                                            "+mPlayers[2].Name());
 				System.out.println("                                                               " + mPlayers[2].GameScore());
@@ -104,6 +122,13 @@ public class UI
 				System.out.println("***************************************************************************************************************************");
 			}
 		}
+
+		/*public void winning()
+		{
+			System.out.println("***************************************************************************************************************************");
+			winner();
+			System.out.println("***************************************************************************************************************************");
+		}*/
 
 		static int readInt(){
 			Scanner kb = new Scanner(System.in);

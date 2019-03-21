@@ -28,7 +28,7 @@ public class Game{
 			}
 		}
 		for(int i = 0; i < 4; i++){
-			UI.Log(Severity.INFO, "Game::Final Scores", mPlayers[i] + " GameScore is " + mPlayers[i].mGameScore);
+			UI.Log(Severity.INFO, "Game::Final Scores", mPlayers[i].Name() + "'s GameScore is " + mPlayers[i].mGameScore);
 		}
 	}
 
@@ -184,7 +184,7 @@ public class Game{
 
 					//Print scores
 					for(Player player : mPlayers){
-						UI.Log(Severity.INFO, "Game::Playing", player + "Total score is: " + player.NumTakes());
+						UI.Log(Severity.INFO, "Game::Player", player.Name() + "'s Total score is: " + player.NumTakes());
 					}
 				}
 				winner();
@@ -220,7 +220,7 @@ public class Game{
 				index = i;
 			}
 		}
-		UI.Log(Severity.INFO, "Game::winner", "Round over. Winner is: " + mPlayers[index]);
+		UI.Log(Severity.INFO, "Round over. ", "Winner is: " + mPlayers[index].Name());
 
 	}
 }

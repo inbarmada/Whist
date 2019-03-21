@@ -9,7 +9,7 @@ public class RealPlayer extends Player
       int bid = UI.getBid();
       mCurContract = curContract;
       if(bid > 0){
-    		UI.Log(Severity.INFO, "Player::Bid", this + ": Choose suit (CL-0; DI-1; He-2; SP-3; NT-4):: ");
+    		//UI.Log(Severity.INFO, "Player::Bid", this + ": Choose suit (CL-0; DI-1; He-2; SP-3; NT-4):: ");
         int suit = bid - 1;
 
         int takes = UI.getBidLevel();
