@@ -11,7 +11,7 @@ public class Main {
 		Player p2 = new AutoPlayer();
 		Player p3 = new AutoPlayer();
 		Player p4 = new AutoPlayer();
-
+    UI.instructions();
         UI.Log(Severity.DEBUG, "MainSDK::main", "Have Created Players");
 
         mGame = new Game(p1, p2, p3, p4);
