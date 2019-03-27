@@ -7,10 +7,6 @@ enum Severity {
 
 public class UI
 {
-    /*static void createCardButton(final Player one, final Card i){
-		Log(Severity.DEBUG, "MainSDK::createCardButton", "...");
-	}*/
-
     static void Log(Severity sev, String str1, String str2)
     {
 			if(sev.ordinal() >= Severity.INFO.ordinal())
@@ -94,7 +90,6 @@ public class UI
 				// Clear the screen
 				System.out.print("\033[H\033[2J");
 				System.out.flush();
-
 				System.out.println("***************************************************************************************************************************");
 				System.out.println("                                                            "+mPlayers[2].Name());
 				System.out.println("                                                               " + mPlayers[2].GameScore());
