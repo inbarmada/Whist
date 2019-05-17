@@ -26,6 +26,7 @@ public class Game{
 			for(int j = 0; j < 4; j++){
 				mPlayers[j].UpdateGameScore();
 			}
+			winner();
 		}
 		for(int i = 0; i < 4; i++){
 			UI.Log(Severity.INFO, "Game::Final Scores", mPlayers[i].Name() + "'s GameScore is " + mPlayers[i].mGameScore);
@@ -187,7 +188,6 @@ public class Game{
 						UI.Log(Severity.INFO, "Game::Player", player.Name() + "'s Total score is: " + player.NumTakes());
 					}
 				}
-				winner();
 
 
 	}
@@ -213,10 +213,10 @@ public class Game{
 
 	public void winner(){
 		int index = -1;
-		int maxPoints = 0;
+		int maxPoints = Integer.MIN_VALUE;
 		for(int i = 0; i < 4; i++){
-			if(mPlayers[i].NumTakes() > maxPoints){
-				maxPoints = mPlayers[i].NumTakes();
+			if(mPlayers[i].GameScore() > maxPoints){
+				maxPoints = mPlayers[i].GameScore();
 				index = i;
 			}
 		}
